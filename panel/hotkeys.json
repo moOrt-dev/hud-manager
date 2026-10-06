@@ -1,0 +1,42 @@
+{
+  "ru": {
+    "popupHint": "Работают, пока запущен менеджер, в любом окне (и в игре). Кнопка делает то же, что и клавиша",
+    "section": "Горячие клавиши",
+    "toggleHud": "Скрыть / показать весь HUD",
+    "togglePlayers": "Скрыть / показать плитки игроков",
+    "toggleLayout": "Плитки: вертикальные внизу / строки по бокам",
+    "toggleNames": "Шапка: держать названия команд открытыми / свернуть",
+    "reload": "Перезагрузить оверлей",
+    "toggleDefuse": "Окно дефуза: показать / скрыть (Alt+В на русской раскладке)",
+    "toggleRadar": "Скрыть / показать радар",
+    "radarBigger": "Радар больше (до 400 px)",
+    "radarSmaller": "Радар меньше (до 250 px)",
+    "toggleVeto": "Экран вето карт",
+    "sbStats": "Табло: статистика",
+    "sbEconomy": "Табло: экономика",
+    "sbLeaders": "Табло: лидеры",
+    "sbHide": "Скрыть табло",
+    "obsHand": "Авто-камера: ручное управление / вернуть авто (Alt+Ф на русской раскладке)",
+    "bombCam": "Камера на бомбу сверху / вернуть к игрокам (Alt+И на русской раскладке)"
+  },
+  "en": {
+    "popupHint": "Work while the manager is running, in any window (also in the game). A button does the same as the key",
+    "section": "Hotkeys",
+    "toggleHud": "Hide / show the whole HUD",
+    "togglePlayers": "Hide / show the player tiles",
+    "toggleLayout": "Tiles: vertical at the bottom / rows at the sides",
+    "toggleNames": "Top bar: keep team names open / fold",
+    "reload": "Reload the overlay",
+    "toggleDefuse": "Defuse window: show / hide",
+    "toggleRadar": "Hide / show the radar",
+    "radarBigger": "Radar bigger (up to 400 px)",
+    "radarSmaller": "Radar smaller (down to 250 px)",
+    "toggleVeto": "Map veto screen",
+    "sbStats": "Scoreboard: stats",
+    "sbEconomy": "Scoreboard: economy",
+    "sbLeaders": "Scoreboard: leaders",
+    "sbHide": "Hide the scoreboard",
+    "obsHand": "Auto camera: manual control / back to auto",
+    "bombCam": "Camera on the bomb from above / back to the players"
+  }
+}

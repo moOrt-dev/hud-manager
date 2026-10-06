@@ -1,0 +1,18 @@
+[
+  { "bind": "Alt+O", "action": "toggleHud" },
+  { "bind": "Alt+P", "action": "togglePlayers" },
+  { "bind": "Alt+V", "action": "toggleLayout" },
+  { "bind": "Alt+N", "action": "toggleNames" },
+  { "bind": "Alt+F5", "action": "reload" },
+  { "bind": "Alt+D", "action": "toggleDefuse" },
+  { "bind": "Alt+M", "action": "toggleRadar" },
+  { "bind": "Shift+Z", "action": "radarBigger" },
+  { "bind": "Shift+X", "action": "radarSmaller" },
+  { "bind": "Alt+K", "action": "toggleVeto" },
+  { "bind": "Alt+1", "action": "sbStats" },
+  { "bind": "Alt+2", "action": "sbEconomy" },
+  { "bind": "Alt+3", "action": "sbLeaders" },
+  { "bind": "Alt+0", "action": "sbHide" },
+  { "bind": "Alt+A", "action": "obsHand" },
+  { "bind": "Alt+B", "action": "bombCam" }
+]

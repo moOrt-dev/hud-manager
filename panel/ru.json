@@ -1,0 +1,116 @@
+[
+  {
+    "label": "Отображение",
+    "name": "display_settings",
+    "inputs": [
+      { "type": "text", "name": "tournament_name", "label": "Название турнира" },
+      { "type": "text", "name": "tournament_stage", "label": "Стадия турнира" },
+      {
+        "type": "select",
+        "name": "theme",
+        "label": "Тема оформления",
+        "values": [
+          { "name": "default", "label": "Стандартная" },
+          { "name": "blast", "label": "BLAST" },
+          { "name": "esl", "label": "ESL" },
+          { "name": "iem", "label": "IEM" },
+          { "name": "pgl", "label": "PGL" },
+          { "name": "faceit", "label": "FACEIT" },
+          { "name": "neon", "label": "NEON" },
+          { "name": "fpg", "label": "FPG" },
+          { "name": "light", "label": "Светлая" },
+          { "name": "ewc", "label": "EWC" },
+          { "name": "starladder", "label": "StarLadder" }
+        ]
+      },
+      {
+        "type": "select",
+        "name": "font",
+        "label": "Шрифт",
+        "values": [
+          { "name": "", "label": "Как в теме" },
+          { "name": "rajdhani", "label": "Rajdhani" },
+          { "name": "oswald", "label": "Oswald" },
+          { "name": "barlow", "label": "Barlow Condensed" },
+          { "name": "montserrat", "label": "Montserrat" },
+          { "name": "teko", "label": "Teko" }
+        ]
+      },
+      { "type": "text", "name": "ct_color", "label": "Цвет CT, HEX" },
+      { "type": "text", "name": "t_color", "label": "Цвет T, HEX" },
+      { "type": "text", "name": "accent_color", "label": "Акцентный цвет, HEX" },
+      { "type": "checkbox", "name": "sharp_corners", "label": "Острые углы" },
+      { "type": "text", "name": "names_secs", "label": "Шапка: названия команд в начале раунда, сек" },
+      { "type": "checkbox", "name": "hide_observed", "label": "Скрыть карточку наблюдаемого игрока" },
+      { "type": "checkbox", "name": "hide_economy", "label": "Скрыть панель экономики в закупке" },
+      { "type": "text", "name": "economy_delay", "label": "Задержка панели экономики, сек" },
+      { "type": "checkbox", "name": "hide_game_killfeed", "label": "Скрыть ленту убийств игры" },
+      { "type": "checkbox", "name": "draw_crosshair", "label": "Рисовать прицел HUD" },
+      { "type": "checkbox", "name": "hide_defuse_popup", "label": "Скрыть окно дефуза" },
+      { "type": "checkbox", "name": "fire_on", "label": "Команда «в огне» после 5 раундов подряд" },
+      { "type": "checkbox", "name": "hide_radar", "label": "Скрыть радар" },
+      { "type": "checkbox", "name": "radar_avatars", "label": "Фото игроков на радаре" },
+      { "type": "checkbox", "name": "hide_series", "label": "Скрыть строку серии карт" },
+      { "type": "checkbox", "name": "no_clutch_zoom", "label": "Не приближать радар в клатче" }
+    ]
+  },
+  {
+    "label": "Спонсоры",
+    "name": "sponsors",
+    "inputs": [
+      { "type": "images", "name": "sponsors", "label": "Логотипы спонсоров" },
+      { "type": "checkbox", "name": "sponsor_always", "label": "Показывать спонсоров постоянно" },
+      { "type": "select", "name": "sponsor_position", "label": "Где показывать спонсоров", "values": [ { "name": "", "label": "Под радаром" }, { "name": "top-right", "label": "В правом верхнем углу" } ] },
+      { "type": "text", "name": "sponsor_interval", "label": "Секунд на один логотип" },
+      { "type": "text", "name": "sponsor_round", "label": "Секунд показа в начале раунда" }
+    ]
+  },
+  {
+    "label": "Табло",
+    "name": "scoreboard_controls",
+    "inputs": [
+      {
+        "type": "action",
+        "name": "scoreboard",
+        "label": "Табло",
+        "values": [
+          { "name": "stats", "label": "Статистика" },
+          { "name": "economy", "label": "Экономика" },
+          { "name": "leaders", "label": "Лидеры" },
+          { "name": "hide", "label": "Скрыть" }
+        ]
+      },
+      { "type": "text", "name": "sb_autohide", "label": "Скрывать табло через N секунд" },
+      { "type": "checkbox", "name": "sb_keep_on_live", "label": "Не закрывать табло в начале раунда" }
+    ]
+  },
+  {
+    "label": "Авто-камера",
+    "name": "observer",
+    "inputs": [
+      { "type": "checkbox", "name": "auto", "label": "Авто-камера включена" },
+      { "type": "select", "name": "mode", "label": "Режим", "values": [ { "name": "auto", "label": "Авто: переключает камеру" }, { "name": "suggest", "label": "Только подсказка: видно в пульте" } ] },
+      { "type": "text", "name": "hold", "label": "Минимум секунд на одном игроке" },
+      { "type": "text", "name": "manual_pause", "label": "Пауза после ручного переключения, сек" },
+      { "type": "text", "name": "port", "label": "Порт telnet CS2" },
+      { "type": "select", "name": "method", "label": "Как переключать", "values": [ { "name": "auto", "label": "Автоматически" }, { "name": "name", "label": "По нику" }, { "name": "keys", "label": "Клавишами 1–0" }, { "name": "accountid", "label": "По Steam ID" } ] },
+      { "type": "checkbox", "name": "helper", "label": "Помощник клавиш" },
+      { "type": "checkbox", "name": "first_person", "label": "Вид от первого лица" }
+    ]
+  },
+  {
+    "label": "Выбор карт",
+    "name": "veto_controls",
+    "inputs": [
+      {
+        "type": "action",
+        "name": "veto",
+        "label": "Экран вето",
+        "values": [
+          { "name": "show", "label": "Показать" },
+          { "name": "hide", "label": "Скрыть" }
+        ]
+      }
+    ]
+  }
+]

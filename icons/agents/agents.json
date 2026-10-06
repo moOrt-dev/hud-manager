@@ -1,0 +1,464 @@
+[
+    {
+        "id":  "ctm_swat_variantf",
+        "side":  "CT",
+        "en":  "1st Lieutenant Farlow | SWAT",
+        "ru":  "Старший лейтенант Фарлоу | SWAT"
+    },
+    {
+        "id":  "ctm_st6_variantk",
+        "side":  "CT",
+        "en":  "3rd Commando Company | KSK",
+        "ru":  "Третья рота коммандо | KSK"
+    },
+    {
+        "id":  "ctm_gendarmerie_variantd",
+        "side":  "CT",
+        "en":  "Aspirant | Gendarmerie Nationale",
+        "ru":  "Кадет | Национальная жандармерия"
+    },
+    {
+        "id":  "ctm_sas_variantf",
+        "side":  "CT",
+        "en":  "B Squadron Officer | SAS",
+        "ru":  "Офицер отряда B | SAS"
+    },
+    {
+        "id":  "ctm_swat_varianth",
+        "side":  "CT",
+        "en":  "Bio-Haz Specialist | SWAT",
+        "ru":  "Специалист по биозащите | SWAT"
+    },
+    {
+        "id":  "ctm_st6_variantj",
+        "side":  "CT",
+        "en":  "\u0027Blueberries\u0027 Buckshot | NSWC SEAL",
+        "ru":  "«Черничный» Бакшот | NSWC SEAL"
+    },
+    {
+        "id":  "ctm_st6_variantg",
+        "side":  "CT",
+        "en":  "Buckshot | NSWC SEAL",
+        "ru":  "Бакшот | NSWC SEAL"
+    },
+    {
+        "id":  "ctm_gendarmerie_variantc",
+        "side":  "CT",
+        "en":  "Chef d\u0027Escadron Rouchard | Gendarmerie Nationale",
+        "ru":  "Коммандант Рушар | Национальная жандармерия"
+    },
+    {
+        "id":  "ctm_gendarmerie_variantb",
+        "side":  "CT",
+        "en":  "Chem-Haz Capitaine | Gendarmerie Nationale",
+        "ru":  "Капитан химзащиты | Национальная жандармерия"
+    },
+    {
+        "id":  "ctm_swat_variantj",
+        "side":  "CT",
+        "en":  "Chem-Haz Specialist | SWAT",
+        "ru":  "Специалист по химзащите | SWAT"
+    },
+    {
+        "id":  "ctm_diver_varianta",
+        "side":  "CT",
+        "en":  "Cmdr. Davida \u0027Goggles\u0027 Fernandez | SEAL Frogman",
+        "ru":  "Капитан Давида «Окуляры» Фернандес | Боевые пловцы SEAL"
+    },
+    {
+        "id":  "ctm_diver_variantb",
+        "side":  "CT",
+        "en":  "Cmdr. Frank \u0027Wet Sox\u0027 Baroud | SEAL Frogman",
+        "ru":  "Капитан Фрэнк «Мокрые носки» Бару | Боевые пловцы SEAL"
+    },
+    {
+        "id":  "ctm_swat_variante",
+        "side":  "CT",
+        "en":  "Cmdr. Mae \u0027Dead Cold\u0027 Jamison | SWAT",
+        "ru":  "Коммандер Мэй «Льдина» Джемисон | SWAT"
+    },
+    {
+        "id":  "ctm_sas_variantg",
+        "side":  "CT",
+        "en":  "D Squadron Officer | NZSAS",
+        "ru":  "Офицер отряда D | NZSAS"
+    },
+    {
+        "id":  "ctm_fbi",
+        "side":  "CT",
+        "en":  "FBI",
+        "ru":  "ФБР"
+    },
+    {
+        "id":  "ctm_gign",
+        "side":  "CT",
+        "en":  "GIGN",
+        "ru":  "GIGN"
+    },
+    {
+        "id":  "ctm_gsg9",
+        "side":  "CT",
+        "en":  "GSG-9",
+        "ru":  "GSG-9"
+    },
+    {
+        "id":  "ctm_heavy",
+        "side":  "CT",
+        "en":  "Heavy Assault (CT)",
+        "ru":  "Тяжёлый штурмовик (CT)"
+    },
+    {
+        "id":  "ctm_idf",
+        "side":  "CT",
+        "en":  "IDF",
+        "ru":  "ЦАХАЛ"
+    },
+    {
+        "id":  "ctm_swat_variantg",
+        "side":  "CT",
+        "en":  "John \u0027Van Healen\u0027 Kask | SWAT",
+        "ru":  "Джон «Ван Лечитт» Каск | SWAT"
+    },
+    {
+        "id":  "ctm_diver_variantc",
+        "side":  "CT",
+        "en":  "Lieutenant Rex Krikey | SEAL Frogman",
+        "ru":  "Лейтенант Рекс Крайки | Боевые пловцы SEAL"
+    },
+    {
+        "id":  "ctm_swat_variantk",
+        "side":  "CT",
+        "en":  "Lieutenant \u0027Tree Hugger\u0027 Farlow | SWAT",
+        "ru":  "Лейтенант «Лесник» Фарлоу | SWAT"
+    },
+    {
+        "id":  "ctm_st6_varianti",
+        "side":  "CT",
+        "en":  "Lt. Commander Ricksaw | NSWC SEAL",
+        "ru":  "Капитан 3-го ранга Риксоу | NSWC SEAL"
+    },
+    {
+        "id":  "ctm_fbi_variantg",
+        "side":  "CT",
+        "en":  "Markus Delrow | FBI HRT",
+        "ru":  "Маркус Делроу | ФБР: антитеррор"
+    },
+    {
+        "id":  "ctm_fbi_varianth",
+        "side":  "CT",
+        "en":  "Michael Syfers | FBI Sniper",
+        "ru":  "Майкл Сайферс | ФБР: снайпер"
+    },
+    {
+        "id":  "ctm_gendarmerie_variante",
+        "side":  "CT",
+        "en":  "Officer Jacques Beltram | Gendarmerie Nationale",
+        "ru":  "Офицер Жак Белтрам | Национальная жандармерия"
+    },
+    {
+        "id":  "ctm_fbi_variantf",
+        "side":  "CT",
+        "en":  "Operator | FBI SWAT",
+        "ru":  "Оперативник | ФБР: SWAT"
+    },
+    {
+        "id":  "ctm_st6_variantn",
+        "side":  "CT",
+        "en":  "Primeiro Tenente | Brazilian 1st Battalion",
+        "ru":  "Старший лейтенант | Первый батальон Бразилии"
+    },
+    {
+        "id":  "ctm_sas",
+        "side":  "CT",
+        "en":  "SAS",
+        "ru":  "SAS"
+    },
+    {
+        "id":  "ctm_st6",
+        "side":  "CT",
+        "en":  "SEAL Team 6",
+        "ru":  "SEAL Team 6"
+    },
+    {
+        "id":  "ctm_st6_variante",
+        "side":  "CT",
+        "en":  "Seal Team 6 Soldier | NSWC SEAL",
+        "ru":  "Солдат SEAL Team 6 | NSWC SEAL"
+    },
+    {
+        "id":  "ctm_swat_varianti",
+        "side":  "CT",
+        "en":  "Sergeant Bombson | SWAT",
+        "ru":  "Сержант Бомбсон | SWAT"
+    },
+    {
+        "id":  "ctm_gendarmerie_varianta",
+        "side":  "CT",
+        "en":  "Sous-Lieutenant Medic | Gendarmerie Nationale",
+        "ru":  "Второй лейтенант медслужбы | Национальная жандармерия"
+    },
+    {
+        "id":  "ctm_fbi_variantb",
+        "side":  "CT",
+        "en":  "Special Agent Ava | FBI",
+        "ru":  "Особый агент Ава | ФБР"
+    },
+    {
+        "id":  "ctm_swat",
+        "side":  "CT",
+        "en":  "SWAT",
+        "ru":  "SWAT"
+    },
+    {
+        "id":  "ctm_st6_variantl",
+        "side":  "CT",
+        "en":  "\u0027Two Times\u0027 McCoy | TACP Cavalry",
+        "ru":  "«Дважды» Маккой | Кавалерия TACP"
+    },
+    {
+        "id":  "ctm_st6_variantm",
+        "side":  "CT",
+        "en":  "\u0027Two Times\u0027 McCoy | USAF TACP",
+        "ru":  "«Дважды» Маккой | USAF TACP"
+    },
+    {
+        "id":  "tm_anarchist",
+        "side":  "T",
+        "en":  "Anarchist",
+        "ru":  "Анархист"
+    },
+    {
+        "id":  "tm_jungle_raider_variantc",
+        "side":  "T",
+        "en":  "Arno The Overgrown | Guerrilla Warfare",
+        "ru":  "Переросток Арно | Партизаны"
+    },
+    {
+        "id":  "tm_balkan_variantj",
+        "side":  "T",
+        "en":  "Blackwolf | Sabre",
+        "ru":  "Черноволк | Сабля"
+    },
+    {
+        "id":  "tm_professional_varf5",
+        "side":  "T",
+        "en":  "Bloody Darryl The Strapped | The Professionals",
+        "ru":  "Сэр «Чёртовы ремни» Дэррил | Профессионалы"
+    },
+    {
+        "id":  "tm_jungle_raider_variantd",
+        "side":  "T",
+        "en":  "Col. Mangos Dabisi | Guerrilla Warfare",
+        "ru":  "Полковник Мангос Дабиси | Партизаны"
+    },
+    {
+        "id":  "tm_jungle_raider_variantb",
+        "side":  "T",
+        "en":  "Crasswater The Forgotten | Guerrilla Warfare",
+        "ru":  "Крэссуотер Забытый | Партизаны"
+    },
+    {
+        "id":  "tm_balkan_variantf",
+        "side":  "T",
+        "en":  "Dragomir | Sabre",
+        "ru":  "Драгомир | Сабля"
+    },
+    {
+        "id":  "tm_balkan_variantl",
+        "side":  "T",
+        "en":  "Dragomir | Sabre Footsoldier",
+        "ru":  "Драгомир | Пехота «Сабли»"
+    },
+    {
+        "id":  "tm_jungle_raider_varianta",
+        "side":  "T",
+        "en":  "Elite Trapper Solman | Guerrilla Warfare",
+        "ru":  "Элитный охотник Солман | Партизаны"
+    },
+    {
+        "id":  "tm_phoenix_variantf",
+        "side":  "T",
+        "en":  "Enforcer | Phoenix",
+        "ru":  "Головорез | Феникс"
+    },
+    {
+        "id":  "tm_professional_varj",
+        "side":  "T",
+        "en":  "Getaway Sally | The Professionals",
+        "ru":  "Беглянка Салли | Профессионалы"
+    },
+    {
+        "id":  "tm_leet_variantg",
+        "side":  "T",
+        "en":  "Ground Rebel | Elite Crew",
+        "ru":  "Диверсант | Элитный отряд"
+    },
+    {
+        "id":  "tm_phoenix_heavy",
+        "side":  "T",
+        "en":  "Heavy Assault (T)",
+        "ru":  "Тяжёлый штурмовик (T)"
+    },
+    {
+        "id":  "tm_leet_variantj",
+        "side":  "T",
+        "en":  "Jungle Rebel | Elite Crew",
+        "ru":  "Тропический диверсант | Элитный отряд"
+    },
+    {
+        "id":  "tm_professional_varh",
+        "side":  "T",
+        "en":  "Little Kev | The Professionals",
+        "ru":  "Крошка Кев | Профессионалы"
+    },
+    {
+        "id":  "tm_balkan_varianti",
+        "side":  "T",
+        "en":  "Maximus | Sabre",
+        "ru":  "Максимус | Сабля"
+    },
+    {
+        "id":  "tm_jungle_raider_variantb2",
+        "side":  "T",
+        "en":  "\u0027Medium Rare\u0027 Crasswater | Guerrilla Warfare",
+        "ru":  "Крэссуотер «Поджарый» | Партизаны"
+    },
+    {
+        "id":  "tm_professional_vari",
+        "side":  "T",
+        "en":  "Number K | The Professionals",
+        "ru":  "Номер К | Профессионалы"
+    },
+    {
+        "id":  "tm_leet_varianth",
+        "side":  "T",
+        "en":  "Osiris | Elite Crew",
+        "ru":  "Осирис | Элитный отряд"
+    },
+    {
+        "id":  "tm_phoenix",
+        "side":  "T",
+        "en":  "Phoenix",
+        "ru":  "Феникс"
+    },
+    {
+        "id":  "tm_pirate",
+        "side":  "T",
+        "en":  "Pirate",
+        "ru":  "Пират"
+    },
+    {
+        "id":  "tm_leet_varianti",
+        "side":  "T",
+        "en":  "Prof. Shahmat | Elite Crew",
+        "ru":  "Профессор Шахмат | Элитный отряд"
+    },
+    {
+        "id":  "tm_professional",
+        "side":  "T",
+        "en":  "Professional",
+        "ru":  "Профессионал"
+    },
+    {
+        "id":  "tm_balkan_variantg",
+        "side":  "T",
+        "en":  "Rezan The Ready | Sabre",
+        "ru":  "Резан Готовый | Сабля"
+    },
+    {
+        "id":  "tm_balkan_variantk",
+        "side":  "T",
+        "en":  "Rezan the Redshirt | Sabre",
+        "ru":  "Резан Красный | Сабля"
+    },
+    {
+        "id":  "tm_professional_varg",
+        "side":  "T",
+        "en":  "Safecracker Voltzmann | The Professionals",
+        "ru":  "Взломщица Вольцманн | Профессионалы"
+    },
+    {
+        "id":  "tm_separatist",
+        "side":  "T",
+        "en":  "Separatist",
+        "ru":  "Сепаратист"
+    },
+    {
+        "id":  "tm_professional_varf3",
+        "side":  "T",
+        "en":  "Sir Bloody Darryl Royale | The Professionals",
+        "ru":  "Сэр «Чёртова знать» Дэррил | Профессионалы"
+    },
+    {
+        "id":  "tm_professional_varf4",
+        "side":  "T",
+        "en":  "Sir Bloody Loudmouth Darryl | The Professionals",
+        "ru":  "Сэр «Чёртов болтун» Дэррил | Профессионалы"
+    },
+    {
+        "id":  "tm_professional_varf",
+        "side":  "T",
+        "en":  "Sir Bloody Miami Darryl | The Professionals",
+        "ru":  "Сэр «Чёртов Майами» Дэррил | Профессионалы"
+    },
+    {
+        "id":  "tm_professional_varf1",
+        "side":  "T",
+        "en":  "Sir Bloody Silent Darryl | The Professionals",
+        "ru":  "Сэр «Чёртов тихоня» Дэррил | Профессионалы"
+    },
+    {
+        "id":  "tm_professional_varf2",
+        "side":  "T",
+        "en":  "Sir Bloody Skullhead Darryl | The Professionals",
+        "ru":  "Сэр «Чёртов череп» Дэррил | Профессионалы"
+    },
+    {
+        "id":  "tm_phoenix_variantg",
+        "side":  "T",
+        "en":  "Slingshot | Phoenix",
+        "ru":  "Мясник | Феникс"
+    },
+    {
+        "id":  "tm_phoenix_varianth",
+        "side":  "T",
+        "en":  "Soldier | Phoenix",
+        "ru":  "Солдат | Феникс"
+    },
+    {
+        "id":  "tm_phoenix_varianti",
+        "side":  "T",
+        "en":  "Street Soldier | Phoenix",
+        "ru":  "Уличный солдат | Феникс"
+    },
+    {
+        "id":  "tm_balkan_varianth",
+        "side":  "T",
+        "en":  "\u0027The Doctor\u0027 Romanov | Sabre",
+        "ru":  "«Доктор» Романов | Сабля"
+    },
+    {
+        "id":  "tm_leet_variantf",
+        "side":  "T",
+        "en":  "The Elite Mr. Muhlik | Elite Crew",
+        "ru":  "Элитный мистер Мохлик | Элитный отряд"
+    },
+    {
+        "id":  "tm_jungle_raider_variantf2",
+        "side":  "T",
+        "en":  "Trapper | Guerrilla Warfare",
+        "ru":  "Охотник | Партизаны"
+    },
+    {
+        "id":  "tm_jungle_raider_variantf",
+        "side":  "T",
+        "en":  "Trapper Aggressor | Guerrilla Warfare",
+        "ru":  "Охотник-агрессор | Партизаны"
+    },
+    {
+        "id":  "tm_jungle_raider_variante",
+        "side":  "T",
+        "en":  "Vypa Sista of the Revolution | Guerrilla Warfare",
+        "ru":  "Вайпа, сестра революции | Партизаны"
+    }
+]

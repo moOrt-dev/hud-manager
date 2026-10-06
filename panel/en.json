@@ -1,0 +1,116 @@
+[
+  {
+    "label": "Display settings",
+    "name": "display_settings",
+    "inputs": [
+      { "type": "text", "name": "tournament_name", "label": "Tournament name" },
+      { "type": "text", "name": "tournament_stage", "label": "Tournament stage" },
+      {
+        "type": "select",
+        "name": "theme",
+        "label": "Theme",
+        "values": [
+          { "name": "default", "label": "Default" },
+          { "name": "blast", "label": "BLAST" },
+          { "name": "esl", "label": "ESL" },
+          { "name": "iem", "label": "IEM" },
+          { "name": "pgl", "label": "PGL" },
+          { "name": "faceit", "label": "FACEIT" },
+          { "name": "neon", "label": "NEON" },
+          { "name": "fpg", "label": "FPG" },
+          { "name": "light", "label": "Light" },
+          { "name": "ewc", "label": "EWC" },
+          { "name": "starladder", "label": "StarLadder" }
+        ]
+      },
+      {
+        "type": "select",
+        "name": "font",
+        "label": "Font",
+        "values": [
+          { "name": "", "label": "Theme default" },
+          { "name": "rajdhani", "label": "Rajdhani" },
+          { "name": "oswald", "label": "Oswald" },
+          { "name": "barlow", "label": "Barlow Condensed" },
+          { "name": "montserrat", "label": "Montserrat" },
+          { "name": "teko", "label": "Teko" }
+        ]
+      },
+      { "type": "text", "name": "ct_color", "label": "CT color, HEX" },
+      { "type": "text", "name": "t_color", "label": "T color, HEX" },
+      { "type": "text", "name": "accent_color", "label": "Accent color, HEX" },
+      { "type": "checkbox", "name": "sharp_corners", "label": "Sharp corners" },
+      { "type": "text", "name": "names_secs", "label": "Top bar: team names at round start, sec" },
+      { "type": "checkbox", "name": "hide_observed", "label": "Hide the observed player card" },
+      { "type": "checkbox", "name": "hide_economy", "label": "Hide the economy panel in freezetime" },
+      { "type": "text", "name": "economy_delay", "label": "Economy panel delay, sec" },
+      { "type": "checkbox", "name": "hide_game_killfeed", "label": "Hide the game killfeed" },
+      { "type": "checkbox", "name": "draw_crosshair", "label": "Draw a HUD crosshair" },
+      { "type": "checkbox", "name": "hide_defuse_popup", "label": "Hide the defuse window" },
+      { "type": "checkbox", "name": "fire_on", "label": "Team \"on fire\" after 5 rounds in a row" },
+      { "type": "checkbox", "name": "hide_radar", "label": "Hide radar" },
+      { "type": "checkbox", "name": "radar_avatars", "label": "Player photos on the radar" },
+      { "type": "checkbox", "name": "hide_series", "label": "Hide the map series line" },
+      { "type": "checkbox", "name": "no_clutch_zoom", "label": "Do not zoom the radar in a clutch" }
+    ]
+  },
+  {
+    "label": "Sponsors",
+    "name": "sponsors",
+    "inputs": [
+      { "type": "images", "name": "sponsors", "label": "Sponsor logos" },
+      { "type": "checkbox", "name": "sponsor_always", "label": "Show sponsors all the time" },
+      { "type": "select", "name": "sponsor_position", "label": "Where to show sponsors", "values": [ { "name": "", "label": "Under the radar" }, { "name": "top-right", "label": "Top right corner" } ] },
+      { "type": "text", "name": "sponsor_interval", "label": "Seconds per logo" },
+      { "type": "text", "name": "sponsor_round", "label": "Seconds shown at round start" }
+    ]
+  },
+  {
+    "label": "Scoreboard",
+    "name": "scoreboard_controls",
+    "inputs": [
+      {
+        "type": "action",
+        "name": "scoreboard",
+        "label": "Scoreboard",
+        "values": [
+          { "name": "stats", "label": "Stats" },
+          { "name": "economy", "label": "Economy" },
+          { "name": "leaders", "label": "Leaders" },
+          { "name": "hide", "label": "Hide" }
+        ]
+      },
+      { "type": "text", "name": "sb_autohide", "label": "Hide the scoreboard after N seconds" },
+      { "type": "checkbox", "name": "sb_keep_on_live", "label": "Keep the scoreboard open when the round starts" }
+    ]
+  },
+  {
+    "label": "Auto camera",
+    "name": "observer",
+    "inputs": [
+      { "type": "checkbox", "name": "auto", "label": "Auto camera on" },
+      { "type": "select", "name": "mode", "label": "Mode", "values": [ { "name": "auto", "label": "Auto: switches the camera" }, { "name": "suggest", "label": "Suggest only: shows in the control page" } ] },
+      { "type": "text", "name": "hold", "label": "Minimum seconds on one player" },
+      { "type": "text", "name": "manual_pause", "label": "Pause after a manual switch, sec" },
+      { "type": "text", "name": "port", "label": "CS2 telnet port" },
+      { "type": "select", "name": "method", "label": "Switch by", "values": [ { "name": "auto", "label": "Automatic" }, { "name": "name", "label": "By nickname" }, { "name": "keys", "label": "Keys 1–0" }, { "name": "accountid", "label": "By Steam ID" } ] },
+      { "type": "checkbox", "name": "helper", "label": "Key helper" },
+      { "type": "checkbox", "name": "first_person", "label": "First-person view" }
+    ]
+  },
+  {
+    "label": "Map veto",
+    "name": "veto_controls",
+    "inputs": [
+      {
+        "type": "action",
+        "name": "veto",
+        "label": "Veto screen",
+        "values": [
+          { "name": "show", "label": "Show" },
+          { "name": "hide", "label": "Hide" }
+        ]
+      }
+    ]
+  }
+]

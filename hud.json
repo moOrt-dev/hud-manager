@@ -1,0 +1,14 @@
+{
+  "name": "New HUD",
+  "version": "0.1.0",
+  "author": "mo_ORT · twitch.tv/mo_ort32",
+  "legacy": false,
+  "radar": false,
+  "killfeed": false,
+  "game": "cs2",
+  "boltobserv": {
+    "css": false,
+    "maps": false
+  },
+  "variants": ["horizontal", "vertical"]
+}

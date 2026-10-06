@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>New HUD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- fonts used by the themes (js/themes.js FONTS) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Oswald:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&family=Montserrat:wght@500;600;700&family=Teko:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/hud.css" />
+    <!-- socket.io client is served by the JTs Hud Manager server (port 1349) -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="./js/main.js"></script>
+  </head>
+  <body>
+    <div id="hud">
+      <div id="series"></div>
+      <div id="radar"></div>
+      <div id="sponsors"></div>
+      <div id="topbar"></div>
+      <div id="economy"></div>
+      <div id="killfeed"></div>
+      <div id="players-left" class="players left"></div>
+      <div id="players-right" class="players right"></div>
+      <div id="observed"></div>
+      <div id="defuse"></div>
+      <div id="scoreboard"></div>
+      <div id="warmup">WARMUP</div>
+      <div id="crosshair"><i></i><i></i><i></i><i></i></div>
+    </div>
+    <!-- outside #hud so it can be shown between maps when there is no game data -->
+    <div id="veto"></div>
+  </body>
+</html>
