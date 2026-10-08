@@ -15,3 +15,5 @@ telnet-access.json
 app.asar*
 # written by manager-patch/patch-telnet.ps1 next to itself
 *.patched.js
+# installer build: staged program, tools, output exe
+_build/

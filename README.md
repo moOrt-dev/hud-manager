@@ -1,5 +1,9 @@
 # New HUD — CS2 broadcast HUD for JTs Hud Manager
 
+### ⬇️ [Скачать установщик / Download the installer (HUD-Manager-mo_ORT-Setup-7.13.27.exe)](https://github.com/moOrt-dev/hud-manager/releases/latest/download/HUD-Manager-mo_ORT-Setup-7.13.27.exe)
+
+Все версии / All versions: [github.com/moOrt-dev/hud-manager/releases](https://github.com/moOrt-dev/hud-manager/releases) · Репозиторий / Repository: [github.com/moOrt-dev/hud-manager](https://github.com/moOrt-dev/hud-manager)
+
 [Русский](#русский) · [English](#english)
 
 ---
@@ -18,15 +22,22 @@
 
 ### Что нужно
 - Windows 10/11, Counter-Strike 2.
-- JTs Hud Manager: оригинал или сборка из [релизов этого репозитория](../../releases).
 
-### Установка
-1. Скачайте репозиторий: **Code → Download ZIP** — и распакуйте.
-2. Скопируйте папку проекта в `%USERPROFILE%\jthm-huds\newHud`. Можно и так: в распакованной папке выполните
-   `powershell -ExecutionPolicy Bypass -File deploy.ps1` — скрипт скопирует HUD сам.
-3. Запустите JTs Hud Manager. Установите GSI-конфиг для CS2 в настройках менеджера, если ещё не установлен.
+### Установка (рекомендуется)
+1. Скачайте **[HUD-Manager-mo_ORT-Setup-7.13.27.exe](https://github.com/moOrt-dev/hud-manager/releases/latest/download/HUD-Manager-mo_ORT-Setup-7.13.27.exe)** и запустите. Права администратора не нужны.
+2. Выберите компоненты: программа, New HUD, помощник клавиш (автозапуск), ярлык на рабочем столе.
+   Установщик ставит менеджер туда же, где стоит JTs Hud Manager, и заменяет его. Ваши матчи, команды, игроки и логотипы сохраняются.
+3. Запустите **HUD Manager (mo_ORT)**. Установите GSI-конфиг для CS2 в настройках менеджера, если ещё не установлен.
 4. В менеджере на странице **HUDs** выберите **New HUD** и откройте оверлей.
 5. Зайдите в CS2 наблюдателем или включите демку (`playdemo имя`): HUD покажет игру.
+
+Удаление: «Параметры → Приложения → HUD Manager (mo_ORT)». Ваши данные и папка HUD остаются.
+Новые версии менеджер покажет сам, баннером «есть обновление».
+
+### Установка вручную (только HUD, в оригинальный JTs Hud Manager)
+1. Скачайте репозиторий: **Code → Download ZIP** — и распакуйте.
+2. Скопируйте папку проекта в `%USERPROFILE%\jthm-huds\newHud` или выполните в ней `powershell -ExecutionPolicy Bypass -File deploy.ps1`.
+3. Для авто-камеры через консоль CS2 поставьте патч `manager-patch\patch-telnet.ps1` (менеджер должен быть закрыт).
 
 ### Пульт управления
 - В менеджере: карточка New HUD → **Open Control Panel**, или в браузере `http://localhost:1349/huds/newHud/control.html`.
@@ -94,15 +105,22 @@
 
 ### Requirements
 - Windows 10/11, Counter-Strike 2.
-- JTs Hud Manager: the original or the build from [this repository's releases](../../releases).
 
-### Install
-1. Download the repository: **Code → Download ZIP** — and unpack it.
-2. Copy the project folder to `%USERPROFILE%\jthm-huds\newHud`. Or run this in the unpacked folder:
-   `powershell -ExecutionPolicy Bypass -File deploy.ps1` — the script copies the HUD for you.
-3. Start JTs Hud Manager. Install the GSI config for CS2 in the manager settings if it is not installed yet.
+### Install (recommended)
+1. Download **[HUD-Manager-mo_ORT-Setup-7.13.27.exe](https://github.com/moOrt-dev/hud-manager/releases/latest/download/HUD-Manager-mo_ORT-Setup-7.13.27.exe)** and run it. No admin rights needed.
+2. Pick the components: the program, New HUD, the key helper (autostart), a desktop shortcut.
+   The installer puts the manager where JTs Hud Manager lives and replaces it. Your matches, teams, players and logos are kept.
+3. Start **HUD Manager (mo_ORT)**. Install the GSI config for CS2 in the manager settings if it is not installed yet.
 4. On the manager's **HUDs** page pick **New HUD** and open the overlay.
 5. Join CS2 as a spectator or play a demo (`playdemo name`): the HUD shows the game.
+
+Uninstall: "Settings → Apps → HUD Manager (mo_ORT)". Your data and the HUD folder stay.
+The manager shows new versions by itself, with an "update available" banner.
+
+### Manual install (only the HUD, into the original JTs Hud Manager)
+1. Download the repository: **Code → Download ZIP** — and unpack it.
+2. Copy the project folder to `%USERPROFILE%\jthm-huds\newHud`, or run `powershell -ExecutionPolicy Bypass -File deploy.ps1` in it.
+3. For the auto camera through the CS2 console, apply `manager-patch\patch-telnet.ps1` (the manager must be closed).
 
 ### Control page
 - In the manager: the New HUD card → **Open Control Panel**, or in a browser: `http://localhost:1349/huds/newHud/control.html`.
