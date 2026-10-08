@@ -83,6 +83,13 @@
 ### Безопасность
 Патч `manager-patch\patch-telnet.ps1` добавляет в менеджер передачу команд в консоль CS2. По умолчанию команды принимаются только со страниц менеджера на этом компьютере, и только команды камеры (`spec_*`, `echo`). Открыть доступ можно только на самом компьютере: `manager-patch\telnet-access.ps1`, параметры описаны в файле. Не открывайте порты 1349 и 2020 в роутере или брандмауэре.
 
+### Для разработчиков: сборка установщика
+1. Поставьте менеджер и примените свои правки, установщик собирается из установленной программы (`%LOCALAPPDATA%\Programs\jts-hud`).
+2. Распакуйте портативный [NSIS](https://nsis.sourceforge.io) (zip) в `_build\tools\nsis-3.13`.
+3. Выполните `powershell -ExecutionPolicy Bypass -File installer\build.ps1 -Version 7.13.28`. Номер версии должен быть той же длины, что 7.13.27: по нему менеджер показывает баннер обновления.
+4. Готовый файл — в `_build\out`. Скрипт собирает HUD без игроков и загруженных логотипов и останавливается, если находит в сборке личные данные (имя пользователя Windows, пути, Steam ID).
+5. Проверка без установки: `HUD-Manager-mo_ORT-Setup-<версия>.exe /S /TEST /D=<папка>` только распаковывает программу в папку.
+
 ### Авторы и лицензии
 - HUD — mo_ORT (twitch.tv/mo_ort32).
 - [JTs Hud Manager](https://github.com/JohnTimmermann/JTs-Hud-Manager) — John Timmermann, GPL-3.0.
@@ -165,6 +172,13 @@ The CS2 camera is switched in one of two ways. **"Automatically"** picks the way
 
 ### Security
 The `manager-patch\patch-telnet.ps1` patch lets the manager pass commands to the CS2 console. By default only the manager's own pages on this PC may send them, and only camera commands (`spec_*`, `echo`). Access can be opened only on the PC itself: `manager-patch\telnet-access.ps1`, the options are described in the file. Do not open ports 1349 and 2020 in your router or firewall.
+
+### For developers: building the installer
+1. Install the manager and apply your changes: the installer is built from the installed program (`%LOCALAPPDATA%\Programs\jts-hud`).
+2. Unpack portable [NSIS](https://nsis.sourceforge.io) (zip) into `_build\tools\nsis-3.13`.
+3. Run `powershell -ExecutionPolicy Bypass -File installer\build.ps1 -Version 7.13.28`. The version must have the same length as 7.13.27: the manager shows its update banner by it.
+4. The file is in `_build\out`. The script builds the HUD without players and uploaded logos and stops if it finds personal data in the build (the Windows user name, paths, Steam IDs).
+5. Check without installing: `HUD-Manager-mo_ORT-Setup-<version>.exe /S /TEST /D=<folder>` only unpacks the program into the folder.
 
 ### Credits and licenses
 - HUD — mo_ORT (twitch.tv/mo_ort32).
