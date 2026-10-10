@@ -23,11 +23,10 @@ Copy-Item (Join-Path $src 'panel\en.json') (Join-Path $dst 'panel.json') -Force
 # "Agents" section of the manager panel: for every player in the manager two selects (agent as CT / as T),
 # values = official CS2 agents (icons\agents\agents.json). Stored in config.agents_panel as "<steamid>_CT" / "<steamid>_T"
 # (the control page writes the same keys). Built from the manager's player list -> redeploy + restart after adding players.
+# the agent names always get their Russian pairs (also with -Clean or with the manager not running)
 $agentPairs = @()
-if ($Clean) {
-  # the agent names still get their Russian pairs (the control page's "Agents" tab is built by the HUD itself)
-  foreach ($a in (& $readJson 'icons\agents\agents.json')) { $agentPairs += , @($a.en, $a.ru) }
-} else { try {
+foreach ($a in (& $readJson 'icons\agents\agents.json')) { $agentPairs += , @($a.en, $a.ru) }
+if (-not $Clean) { try {
   $agents = & $readJson 'icons\agents\agents.json'
   $players = Invoke-RestMethod 'http://localhost:1349/api/players' -TimeoutSec 3
   $teams = @{}; foreach ($t in (Invoke-RestMethod 'http://localhost:1349/api/teams' -TimeoutSec 3)) { $teams[$t._id] = $t.name }
@@ -35,7 +34,6 @@ if ($Clean) {
   foreach ($side in 'CT', 'T') {
     $vals[$side] = (@('{ "name": "", "label": "Automatic" }') + @($agents | Where-Object side -eq $side | ForEach-Object { '{ "name": ' + (ConvertTo-Json $_.id) + ', "label": ' + (ConvertTo-Json $_.en) + ' }' })) -join ', '
   }
-  foreach ($a in $agents) { $agentPairs += , @($a.en, $a.ru) }
   $inputs = foreach ($p in ($players | Where-Object steamid | Sort-Object { $teams[$_.team] }, username)) {
     $who = $p.username + $(if ($teams[$p.team]) { " ($($teams[$p.team]))" } else { '' })
     foreach ($side in 'CT', 'T') {

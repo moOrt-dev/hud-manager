@@ -94,7 +94,7 @@
       { "type": "text", "name": "manual_pause", "label": "Пауза после ручного переключения, сек" },
       { "type": "text", "name": "port", "label": "Порт telnet CS2" },
       { "type": "select", "name": "method", "label": "Как переключать", "values": [ { "name": "auto", "label": "Автоматически" }, { "name": "name", "label": "По нику" }, { "name": "keys", "label": "Клавишами 1–0" }, { "name": "accountid", "label": "По Steam ID" } ] },
-      { "type": "checkbox", "name": "helper", "label": "Помощник клавиш" },
+      { "type": "checkbox", "name": "helper_off", "label": "Отключить помощника клавиш" },
       { "type": "checkbox", "name": "first_person", "label": "Вид от первого лица" }
     ]
   },

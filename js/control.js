@@ -79,10 +79,10 @@ const TEXT = {
     obs_port: 'CS2 telnet port', obs_method: 'Switch by', obsMethodName: 'By nickname', obsMethodId: 'By Steam ID',
     obsMethodKeys: 'Keys 1–0',
     obsMethodAuto: 'Automatic',
-    obsNoHelper: 'The key helper is not running: start helper\\newhud-key-helper.cmd', obsNoKeys: 'Alt+B needs the CS2 console: not available with the key helper',
-    obsHelperOn: 'Key helper: connected', obsHelperFocus: 'Key helper: CS2 is not the active window — keys are not pressed', obsHelperOff: 'Key helper: not running (helper\\install-autostart.cmd starts it with Windows)',
-    obsHelperDisabled: 'Key helper: off in the settings', obsHelperOffState: 'The key helper is off in the settings: without the CS2 console the camera is not switched',
-    obs_helper: 'Key helper',
+    obsNoHelper: 'The key helper is not running: Start menu → "Auto camera key helper" (or helper\\newhud-key-helper.cmd)', obsNoKeys: 'Alt+B needs the CS2 console: not available with the key helper',
+    obsHelperOn: 'Key helper: connected', obsHelperFocus: 'Key helper: CS2 is not the active window — keys are not pressed', obsHelperOff: 'Key helper: not running (Start menu → "Auto camera key helper")',
+    obsHelperDisabled: 'Key helper: turned off in the settings', obsHelperOffState: 'The key helper is turned off in the settings: without the CS2 console the camera is not switched',
+    obs_helper_off: 'Turn off the key helper',
     obs_first_person: 'First-person view',
     obsModeAuto: 'Auto', obsModeSuggest: 'Suggest only', obsSuggest: 'Suggests: {name} — {reason}', obsLog: 'Recent decisions (newest first)',
     obsModeHint: 'Suggest only: the camera is not touched, the panel just shows who the auto camera would pick — handy for checking it on a demo.',
@@ -158,10 +158,10 @@ const TEXT = {
     obs_port: 'Порт telnet CS2', obs_method: 'Как переключать', obsMethodName: 'По нику', obsMethodId: 'По Steam ID',
     obsMethodKeys: 'Клавишами 1–0',
     obsMethodAuto: 'Автоматически',
-    obsNoHelper: 'Помощник не запущен: запустите helper\\newhud-key-helper.cmd', obsNoKeys: 'Alt+B работает только через консоль CS2, с помощником недоступен',
-    obsHelperOn: 'Помощник: подключён', obsHelperFocus: 'Помощник: окно CS2 не активно — клавиши не нажимаются', obsHelperOff: 'Помощник: не запущен (helper\\install-autostart.cmd — запуск вместе с Windows)',
-    obsHelperDisabled: 'Помощник: выключен в настройках', obsHelperOffState: 'Помощник выключен в настройках: без консоли CS2 камера не переключается',
-    obs_helper: 'Помощник клавиш',
+    obsNoHelper: 'Помощник не запущен: Пуск → «Помощник клавиш авто-камеры» (или helper\\newhud-key-helper.cmd)', obsNoKeys: 'Alt+B работает только через консоль CS2, с помощником недоступен',
+    obsHelperOn: 'Помощник: подключён', obsHelperFocus: 'Помощник: окно CS2 не активно — клавиши не нажимаются', obsHelperOff: 'Помощник: не запущен (Пуск → «Помощник клавиш авто-камеры»)',
+    obsHelperDisabled: 'Помощник: отключён в настройках', obsHelperOffState: 'Помощник отключён в настройках: без консоли CS2 камера не переключается',
+    obs_helper_off: 'Отключить помощника клавиш',
     obs_first_person: 'Вид от первого лица',
     obsModeAuto: 'Авто', obsModeSuggest: 'Только подсказка', obsSuggest: 'Подсказка: {name} — {reason}', obsLog: 'Последние решения (новые сверху)',
     obsModeHint: 'Только подсказка: камера не трогается, пульт лишь показывает, кого выбрала бы авто-камера — удобно проверять на демке.',
@@ -286,8 +286,8 @@ function renderLive() {
           <div><select id="obs-method">${[['auto', 'obsMethodAuto'], ['name', 'obsMethodName'], ['keys', 'obsMethodKeys'], ['accountid', 'obsMethodId']]
             .map(([v, k]) => `<option value="${v}" ${v === obs.method ? 'selected' : ''}>${esc(tr(k))}</option>`)
             .join('')}</select></div>
-          <label for="obs-helper">${tr('obs_helper')}</label>
-          <div><input type="checkbox" id="obs-helper" ${obs.helper !== false ? 'checked' : ''} /></div>
+          <label for="obs-helper-off">${tr('obs_helper_off')}</label>
+          <div><input type="checkbox" id="obs-helper-off" ${obs.helper_off === true ? 'checked' : ''} /></div>
           <label for="obs-fp">${tr('obs_first_person')}</label>
           <div><input type="checkbox" id="obs-fp" ${obs.first_person ? 'checked' : ''} /></div>
         </div>
@@ -368,7 +368,7 @@ function paintObsStatus() {
   const keys = m === 'keys' || (m === 'auto' && (obsStatus?.via === 'keys' || obsStatus?.state === 'nohelper' || Date.now() - helperSeen.at < 15000))
   const helper = !keys
     ? ''
-    : obsConfig().helper === false || helperSeen.enabled === false
+    : obsConfig().helper_off === true || helperSeen.enabled === false
       ? tr('obsHelperDisabled')
       : Date.now() - helperSeen.at > 15000
         ? tr('obsHelperOff')
@@ -474,7 +474,8 @@ $('#tab-live').addEventListener('click', (e) => {
       o.port = $('#obs-port').value.trim()
       o.method = $('#obs-method').value
       o.first_person = $('#obs-fp').checked
-      o.helper = $('#obs-helper').checked
+      o.helper_off = $('#obs-helper-off').checked
+      delete o.helper // the old, inverted setting (a panel save could leave it false)
     })
   if (e.target.closest('#hk-toggle')) {
     showHotkeys = !showHotkeys

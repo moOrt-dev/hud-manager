@@ -94,7 +94,7 @@
       { "type": "text", "name": "manual_pause", "label": "Pause after a manual switch, sec" },
       { "type": "text", "name": "port", "label": "CS2 telnet port" },
       { "type": "select", "name": "method", "label": "Switch by", "values": [ { "name": "auto", "label": "Automatic" }, { "name": "name", "label": "By nickname" }, { "name": "keys", "label": "Keys 1–0" }, { "name": "accountid", "label": "By Steam ID" } ] },
-      { "type": "checkbox", "name": "helper", "label": "Key helper" },
+      { "type": "checkbox", "name": "helper_off", "label": "Turn off the key helper" },
       { "type": "checkbox", "name": "first_person", "label": "First-person view" }
     ]
   },

@@ -1,6 +1,6 @@
 # New HUD — CS2 broadcast HUD for JTs Hud Manager
 
-### ⬇️ [Скачать установщик / Download the installer (HUD-Manager-mo_ORT-Setup-7.13.27.exe)](https://github.com/moOrt-dev/hud-manager/releases/latest/download/HUD-Manager-mo_ORT-Setup-7.13.27.exe)
+### ⬇️ [Скачать установщик / Download the installer (HUD-Manager-mo_ORT-Setup-7.13.28.exe)](https://github.com/moOrt-dev/hud-manager/releases/latest/download/HUD-Manager-mo_ORT-Setup-7.13.28.exe)
 
 Все версии / All versions: [github.com/moOrt-dev/hud-manager/releases](https://github.com/moOrt-dev/hud-manager/releases) · Репозиторий / Repository: [github.com/moOrt-dev/hud-manager](https://github.com/moOrt-dev/hud-manager)
 
@@ -24,7 +24,7 @@
 - Windows 10/11, Counter-Strike 2.
 
 ### Установка (рекомендуется)
-1. Скачайте **[HUD-Manager-mo_ORT-Setup-7.13.27.exe](https://github.com/moOrt-dev/hud-manager/releases/latest/download/HUD-Manager-mo_ORT-Setup-7.13.27.exe)** и запустите. Права администратора не нужны.
+1. Скачайте **[HUD-Manager-mo_ORT-Setup-7.13.28.exe](https://github.com/moOrt-dev/hud-manager/releases/latest/download/HUD-Manager-mo_ORT-Setup-7.13.28.exe)** и запустите. Права администратора не нужны.
 2. Выберите компоненты: программа, New HUD, помощник клавиш (автозапуск), ярлык на рабочем столе.
    Установщик ставит менеджер туда же, где стоит JTs Hud Manager, и заменяет его. Ваши матчи, команды, игроки и логотипы сохраняются.
 3. Запустите **HUD Manager (mo_ORT)**. Установите GSI-конфиг для CS2 в настройках менеджера, если ещё не установлен.
@@ -86,7 +86,7 @@
 ### Для разработчиков: сборка установщика
 1. Поставьте менеджер и примените свои правки, установщик собирается из установленной программы (`%LOCALAPPDATA%\Programs\jts-hud`).
 2. Распакуйте портативный [NSIS](https://nsis.sourceforge.io) (zip) в `_build\tools\nsis-3.13`.
-3. Выполните `powershell -ExecutionPolicy Bypass -File installer\build.ps1 -Version 7.13.28`. Номер версии должен быть той же длины, что 7.13.27: по нему менеджер показывает баннер обновления.
+3. Выполните `powershell -ExecutionPolicy Bypass -File installer\build.ps1 -Version 7.13.29`. Номер версии должен быть той же длины, что 7.13.27: по нему менеджер показывает баннер обновления.
 4. Готовый файл — в `_build\out`. Скрипт собирает HUD без игроков и загруженных логотипов и останавливается, если находит в сборке личные данные (имя пользователя Windows, пути, Steam ID).
 5. Проверка без установки: `HUD-Manager-mo_ORT-Setup-<версия>.exe /S /TEST /D=<папка>` только распаковывает программу в папку.
 
@@ -114,7 +114,7 @@
 - Windows 10/11, Counter-Strike 2.
 
 ### Install (recommended)
-1. Download **[HUD-Manager-mo_ORT-Setup-7.13.27.exe](https://github.com/moOrt-dev/hud-manager/releases/latest/download/HUD-Manager-mo_ORT-Setup-7.13.27.exe)** and run it. No admin rights needed.
+1. Download **[HUD-Manager-mo_ORT-Setup-7.13.28.exe](https://github.com/moOrt-dev/hud-manager/releases/latest/download/HUD-Manager-mo_ORT-Setup-7.13.28.exe)** and run it. No admin rights needed.
 2. Pick the components: the program, New HUD, the key helper (autostart), a desktop shortcut.
    The installer puts the manager where JTs Hud Manager lives and replaces it. Your matches, teams, players and logos are kept.
 3. Start **HUD Manager (mo_ORT)**. Install the GSI config for CS2 in the manager settings if it is not installed yet.
@@ -176,7 +176,7 @@ The `manager-patch\patch-telnet.ps1` patch lets the manager pass commands to the
 ### For developers: building the installer
 1. Install the manager and apply your changes: the installer is built from the installed program (`%LOCALAPPDATA%\Programs\jts-hud`).
 2. Unpack portable [NSIS](https://nsis.sourceforge.io) (zip) into `_build\tools\nsis-3.13`.
-3. Run `powershell -ExecutionPolicy Bypass -File installer\build.ps1 -Version 7.13.28`. The version must have the same length as 7.13.27: the manager shows its update banner by it.
+3. Run `powershell -ExecutionPolicy Bypass -File installer\build.ps1 -Version 7.13.29`. The version must have the same length as 7.13.27: the manager shows its update banner by it.
 4. The file is in `_build\out`. The script builds the HUD without players and uploaded logos and stops if it finds personal data in the build (the Windows user name, paths, Steam IDs).
 5. Check without installing: `HUD-Manager-mo_ORT-Setup-<version>.exe /S /TEST /D=<folder>` only unpacks the program into the folder.
 

@@ -7,8 +7,9 @@ import { BASE } from './api.js'
 
 const ACTION_URL = `${BASE}/api/huds/newHud/action`
 // mode: 'auto' = switches the camera, 'suggest' = only reports who it would pick (control page), sends nothing
-// helper: use the key helper (helper/newhud-key-helper.ps1) when the CS2 console is closed (method 'auto' / 'keys')
-export const OBSERVER_DEFAULTS = { auto: false, mode: 'auto', hold: 4, manual_pause: 8, port: 2020, method: 'auto', first_person: true, helper: true }
+// helper_off: do NOT use the key helper (helper/newhud-key-helper.ps1) when the CS2 console is closed.
+// Inverted on purpose: the manager's panel saves an untouched checkbox as false, so "off" must be the explicit choice
+export const OBSERVER_DEFAULTS = { auto: false, mode: 'auto', hold: 4, manual_pause: 8, port: 2020, method: 'auto', first_person: true, helper_off: false }
 const STEAM64_BASE = 76561197960265728n
 
 const post = (action, data) =>
@@ -47,7 +48,8 @@ export function createObserver() {
   // 'auto' (default): the CS2 console while it answers; when it does not (CS2 without -insecure keeps
   // -netconport closed), the key helper, and the console is tried again every 20 s
   let consoleDownAt = 0
-  const viaKeys = () => cfg.method === 'keys' || (cfg.method === 'auto' && cfg.helper !== false && Date.now() - consoleDownAt < 20000)
+  const helperOn = () => cfg.helper_off !== true
+  const viaKeys = () => cfg.method === 'keys' || (cfg.method === 'auto' && helperOn() && Date.now() - consoleDownAt < 20000)
 
   function command(p) {
     // keys: no console at all, the key helper presses the observer slot number (1..9, 0)
@@ -83,7 +85,7 @@ export function createObserver() {
     target = p.steamid
     sentAt = now
     const byKeys = () => {
-      if (cfg.helper === false) return setStatus({ state: 'helperoff' })
+      if (!helperOn()) return setStatus({ state: 'helperoff' })
       if (Date.now() - helperAt > 15000) return setStatus({ state: 'nohelper' })
       post('obsKey', { slot: p.observer_slot }).catch(() => {})
       return setStatus({ state: 'on', name: p.name, reason, via: 'keys', ...roundInfo })
@@ -92,16 +94,19 @@ export function createObserver() {
     try {
       const res = await post('telnet', { cmd, port: num(cfg.port, 2020) })
       const body = await res.json().catch(() => ({}))
-      // a manager without the telnet action just broadcasts the action and answers { ok: true }
-      if (res.ok && !('out' in body)) return setStatus({ state: 'nopatch' })
-      if (!res.ok) {
-        // CS2 does not answer on the telnet port: in 'auto' switch by keys right away
-        if (cfg.method === 'auto' && cfg.helper !== false && res.status === 502 && p.observer_slot >= 0 && p.observer_slot <= 9) {
-          consoleDownAt = Date.now()
-          return byKeys()
-        }
-        return setStatus({ state: 'error', error: body.error || String(res.status) })
+      // no console way, in 'auto' switch by keys right away (the console is tried again in 20 s):
+      //  - a manager without the telnet action (original JTs Hud Manager) answers { ok: true } with no "out"
+      //  - CS2 does not answer on the telnet port (started without -netconport / -insecure): 502
+      //  - the manager does not let this page use the console (telnet-access.json): 403
+      const noPatch = res.ok && !('out' in body)
+      const noConsole = noPatch || res.status === 502 || res.status === 403
+      if (noConsole && cfg.method === 'auto' && helperOn() && p.observer_slot >= 0 && p.observer_slot <= 9) {
+        consoleDownAt = Date.now()
+        return byKeys()
       }
+      if (noConsole && cfg.method === 'auto' && !helperOn()) return setStatus({ state: 'helperoff' })
+      if (noPatch) return setStatus({ state: 'nopatch' })
+      if (!res.ok) return setStatus({ state: 'error', error: body.error || String(res.status) })
       setStatus({ state: 'on', name: p.name, reason, via: 'console', ...roundInfo })
     } catch (e) {
       setStatus({ state: 'error', error: e.message })
@@ -261,9 +266,10 @@ export function createObserver() {
     bombCam = { prev: raw.player?.team ? raw.player.steamid : target }
     setStatus({ state: 'bomb', ...roundInfo })
     post('telnet', { cmd: `spec_goto ${r1(cam[0])} ${r1(cam[1])} ${r1(cam[2])} ${r1(pitch)} ${r1(yaw)}`, port: num(cfg.port, 2020) })
-      .then((res) => {
-        if (res.ok) return
-        // the console does not answer (CS2 without -insecure): no free camera possible
+      .then(async (res) => {
+        const body = await res.json().catch(() => ({}))
+        if (res.ok && 'out' in body) return
+        // no console (CS2 without -insecure, or a manager without the telnet action): no free camera possible
         if (cfg.method === 'auto') consoleDownAt = Date.now()
         bombCam = null
         setStatus({ state: 'nokeys' })

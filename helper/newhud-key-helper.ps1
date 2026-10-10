@@ -5,7 +5,7 @@
 # so it never fires a weapon-slot key while you play. Run it on the observer PC next to the manager:
 #   newhud-key-helper.cmd        (or: powershell -ExecutionPolicy Bypass -File newhud-key-helper.ps1)
 # Start with Windows (hidden): install-autostart.cmd; remove: uninstall-autostart.cmd.
-# Obeys the setting "Key helper" of the auto camera (config.observer.helper; off = it presses nothing).
+# Obeys the setting "Turn off the key helper" of the auto camera (config.observer.helper_off = true -> it presses nothing).
 param([int]$Port = 1349)
 $ErrorActionPreference = 'Stop'
 
@@ -47,7 +47,7 @@ $script:enabled = $true
 function Update-Enabled {
   try {
     $c = Invoke-RestMethod -Uri "http://localhost:$Port/api/huds/newHud/config" -TimeoutSec 3
-    $script:enabled = -not ($c.observer -and $c.observer.helper -eq $false)
+    $script:enabled = -not ($c.observer -and $c.observer.helper_off -eq $true)
   } catch {}
 }
 function Send-Beat { Post-Action 'obsHelper' ('{"alive":true,"enabled":' + $(if ($script:enabled) { 'true' } else { 'false' }) + '}') }& $say "newHud key helper: connecting to the manager on port $Port (Ctrl+C to stop)"
