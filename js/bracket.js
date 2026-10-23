@@ -38,6 +38,7 @@ export function createBracket(root) {
   root.appendChild(box)
 
   const cell = (node, teams, top) => {
+    const live = !!node.match?.current
     const row = (teamId, wins) => {
       const won = !!node.winnerTeamId && node.winnerTeamId === teamId
       const name = teamId ? teams[teamId]?.shortName || teams[teamId]?.name || '???' : 'TBD'
@@ -45,7 +46,8 @@ export function createBracket(root) {
           <span class="br-name">${esc(name)}</span><span class="br-wins">${teamId ? wins : ''}</span>
         </div>`
     }
-    return `<div class="br-cell" style="top:${top}px">
+    return `<div class="br-cell${live ? ' live' : ''}" style="top:${top}px">
+        ${live ? '<span class="br-live">LIVE</span>' : ''}
         ${row(node.teamAId, node.match?.left?.wins ?? 0)}
         ${row(node.teamBId, node.match?.right?.wins ?? 0)}
       </div>`
