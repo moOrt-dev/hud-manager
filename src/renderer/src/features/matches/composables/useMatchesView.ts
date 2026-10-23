@@ -26,6 +26,12 @@ export function useMatchesView() {
     return team?.logo ? team.logo : null
   }
 
+  // Most teams have no logo, so the name is what actually identifies a side in the list.
+  const getTeamName = (teamId: string | null): string => {
+    if (!teamId) return 'TBD'
+    return teamMap.value[teamId]?.name || 'Unknown team'
+  }
+
   const openEdit = (match: any) => {
     router.push(`/matches/${match._id || match.id}/edit`)
   }
@@ -44,6 +50,7 @@ export function useMatchesView() {
     isLoading,
     tableHeaders: TABLE_HEADERS,
     getTeamLogo,
+    getTeamName,
     deleteMatch,
     toggleCurrent,
     openEdit,

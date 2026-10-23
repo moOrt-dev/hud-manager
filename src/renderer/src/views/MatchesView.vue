@@ -8,7 +8,7 @@ import BaseButton from '@renderer/components/base/BaseButton.vue';
 
 const {
   matches, isLoading, tableHeaders,
-  getTeamLogo, deleteMatch, toggleCurrent,
+  getTeamLogo, getTeamName, deleteMatch, toggleCurrent,
   openEdit, openCreate,
 } = useMatchesView();
 
@@ -49,12 +49,22 @@ const baseUrl = API_URL.replace('/api', '');
 
       <template #cell-matchup="{ item }">
         <div class="flex items-center gap-3">
-          <div class="size-10 flex items-center justify-center shrink-0">
-            <img v-if="getTeamLogo(item.left.id)" :src="`${baseUrl}${getTeamLogo(item.left.id)}`" class="w-full h-full object-contain" />
+          <div class="flex items-center gap-2 min-w-0 flex-1 justify-end">
+            <span class="truncate text-sm" :class="item.left.id ? 'text-text-main' : 'text-zinc-500 italic'">
+              {{ getTeamName(item.left.id) }}
+            </span>
+            <div class="size-10 flex items-center justify-center shrink-0">
+              <img v-if="getTeamLogo(item.left.id)" :src="`${baseUrl}${getTeamLogo(item.left.id)}`" class="w-full h-full object-contain" />
+            </div>
           </div>
-          <span class="text-zinc-400 text-lg">vs</span>
-          <div class="size-10 flex items-center justify-center shrink-0">
-            <img v-if="getTeamLogo(item.right.id)" :src="`${baseUrl}${getTeamLogo(item.right.id)}`" class="w-full h-full object-contain" />
+          <span class="text-zinc-400 text-lg shrink-0">vs</span>
+          <div class="flex items-center gap-2 min-w-0 flex-1">
+            <div class="size-10 flex items-center justify-center shrink-0">
+              <img v-if="getTeamLogo(item.right.id)" :src="`${baseUrl}${getTeamLogo(item.right.id)}`" class="w-full h-full object-contain" />
+            </div>
+            <span class="truncate text-sm" :class="item.right.id ? 'text-text-main' : 'text-zinc-500 italic'">
+              {{ getTeamName(item.right.id) }}
+            </span>
           </div>
         </div>
       </template>
