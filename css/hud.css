@@ -3013,11 +3013,13 @@ html, body {
    into it from the rounds either side. */
 .br-cell.live { box-shadow: 0 0 0 2px var(--accent), 0 0 20px -4px var(--accent); }
 .br-cell.live::before, .br-cell.live::after { background: var(--accent); height: 3px; }
+/* Centred on the divider between the two team rows: the middle of a cell is empty - names sit
+   left, series wins right - so the tag reads cleanly without covering either. */
 .br-live {
-  position: absolute; top: -9px; left: 10px; z-index: 2;
-  height: 17px; padding: 0 7px; border-radius: 3px;
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2;
+  height: 18px; padding: 0 9px; border-radius: 3px;
   background: var(--accent); color: var(--on-side);
-  font-size: 10px; line-height: 17px; letter-spacing: 1.5px;
+  font-size: 11px; line-height: 18px; letter-spacing: 2px;
   animation: br-live-pulse 1.8s ease-in-out infinite;
 }
 @keyframes br-live-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.55; } }
