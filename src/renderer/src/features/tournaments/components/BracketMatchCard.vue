@@ -24,7 +24,15 @@ const toggleWinner = (side: 'A' | 'B') => {
 </script>
 
 <template>
-  <div class="bg-zinc-800 border border-border rounded-xl p-3 space-y-2">
+  <div
+    class="relative bg-zinc-800 border rounded-xl p-3 space-y-2 transition-colors"
+    :class="node.match?.current ? 'border-primary ring-1 ring-primary/60' : 'border-border'"
+  >
+    <!-- the match that is live right now, the same one the broadcast overlay rings -->
+    <span
+      v-if="node.match?.current"
+      class="absolute -top-2 left-3 px-1.5 rounded bg-primary text-zinc-900 text-[10px] font-bold tracking-widest leading-4"
+    >LIVE</span>
     <div
       v-for="side in (['A', 'B'] as const)"
       :key="side"
