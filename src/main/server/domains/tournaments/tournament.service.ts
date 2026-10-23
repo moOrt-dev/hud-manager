@@ -27,6 +27,15 @@ export class TournamentService {
     return this.repo.getAllTournaments()
   }
 
+  // The bracket the given match sits in. Falls back to the most recent one so the overlay still
+  // has something to show for a match that was created by hand rather than by a bracket.
+  async resolveForMatch(matchId: string): Promise<ResolvedTournament | null> {
+    const id = await this.repo.getTournamentIdByMatch(matchId)
+    if (id) return this.resolve(id)
+    const [newest] = await this.repo.getAllTournaments()
+    return newest ? this.resolve(newest.id) : null
+  }
+
   async createTournament(data: CreateTournamentDTO) {
     return this.repo.createTournament(data)
   }

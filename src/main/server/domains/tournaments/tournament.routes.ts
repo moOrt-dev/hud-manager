@@ -3,6 +3,7 @@ import { Server } from 'socket.io'
 import {
   getTournaments,
   getTournament,
+  getTournamentForMatch,
   createTournament,
   renameTournament,
   deleteTournament,
@@ -14,6 +15,8 @@ export default function createTournamentRouter(io: Server) {
   const router = Router()
 
   router.get('/', getTournaments)
+  // Before '/:id', which would otherwise match 'for-match' as a tournament id.
+  router.get('/for-match/:matchId', getTournamentForMatch)
   router.get('/:id', getTournament)
 
   router.post('/', async (req: Request, res: Response) => {

@@ -108,6 +108,13 @@ export class TournamentRepository {
     )
   }
 
+  // Which bracket a match belongs to, for the broadcast overlay: it knows the live match, not
+  // which tournament it came from.
+  async getTournamentIdByMatch(matchId: string): Promise<string | null> {
+    const row = await dbGet('SELECT tournament_id FROM tournament_nodes WHERE match_id = ? LIMIT 1', [matchId])
+    return row ? row.tournament_id : null
+  }
+
   // True while any bracket cell anywhere still points at this match.
   async isMatchReferenced(matchId: string): Promise<boolean> {
     const row = await dbGet('SELECT 1 FROM tournament_nodes WHERE match_id = ? LIMIT 1', [matchId])

@@ -19,6 +19,16 @@ export const getTournament = async (req: Request, res: Response) => {
   }
 }
 
+export const getTournamentForMatch = async (req: Request, res: Response) => {
+  try {
+    const resolved = await tournamentService.resolveForMatch(req.params.matchId as string)
+    if (!resolved) return res.status(404).json({ error: 'No bracket to show' })
+    return res.json(resolved)
+  } catch (error: any) {
+    return res.status(500).json({ error: error.message })
+  }
+}
+
 export const createTournament = async (req: Request, res: Response) => {
   try {
     const tournament = await tournamentService.createTournament(req.body)
