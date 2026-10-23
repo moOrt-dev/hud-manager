@@ -10,7 +10,10 @@ const esc = (s) =>
 // Right-aligned to the actual round count, the same way the manager names them.
 const UPPER_NAMES = ['Round of 32', 'Round of 16', 'Quarterfinal', 'Semifinal', 'Final']
 const upperName = (count, i) => (i === count - 1 ? 'Upper Final' : UPPER_NAMES.slice(UPPER_NAMES.length - count)[i])
-const lowerName = (count, i) => (i === count - 1 ? 'Lower Final' : `Lower Round ${i + 1}`)
+// Named off the end like the upper half: the last round is the final, the one before it the
+// semifinal, and everything earlier keeps its number.
+const lowerName = (count, i) =>
+  i === count - 1 ? 'Lower Final' : i === count - 2 ? 'Lower Semifinal' : `Lower Round ${i + 1}`
 
 const CELL = 58 // one match card, two team rows
 const GAP = 14 // between neighbouring cells of the first round — sets the rhythm of the whole tree

@@ -36,7 +36,10 @@ const upperRoundName = (roundCount: number, round: number) => {
   const name = UPPER_ROUND_KEYS.slice(UPPER_ROUND_KEYS.length - roundCount)[round];
   return round === roundCount - 1 ? 'Upper Final' : name;
 };
-const lowerRoundName = (roundCount: number, round: number) => (round === roundCount - 1 ? 'Lower Final' : `Lower Round ${round + 1}`);
+// Named off the end like the upper half: the last round is the final, the one before it the
+// semifinal, and everything earlier keeps its number.
+const lowerRoundName = (roundCount: number, round: number) =>
+  round === roundCount - 1 ? 'Lower Final' : round === roundCount - 2 ? 'Lower Semifinal' : `Lower Round ${round + 1}`;
 
 const openMatch = (matchId: string) => router.push(`/matches/${matchId}/edit`);
 
