@@ -2,6 +2,8 @@
 // The manager owns the bracket; this only draws what /api/tournaments/for-match/<id> hands back,
 // so a winner ticked in the manager shows up here without the HUD knowing the rules.
 
+import { asset } from './api.js'
+
 const esc = (s) =>
   String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c])
 
@@ -41,8 +43,12 @@ export function createBracket(root) {
     const live = !!node.match?.current
     const row = (teamId, wins) => {
       const won = !!node.winnerTeamId && node.winnerTeamId === teamId
-      const name = teamId ? teams[teamId]?.shortName || teams[teamId]?.name || '???' : 'TBD'
+      const team = teamId ? teams[teamId] : null
+      const name = teamId ? team?.shortName || team?.name || '???' : 'TBD'
+      // The square is drawn for every row, logo or not, so the names stay on one line down a round.
+      const logo = team?.logo ? `<img src="${esc(asset(team.logo))}" alt="" />` : ''
       return `<div class="br-row${won ? ' won' : ''}${teamId ? '' : ' tbd'}">
+          <span class="br-logo">${logo}</span>
           <span class="br-name">${esc(name)}</span><span class="br-wins">${teamId ? wins : ''}</span>
         </div>`
     }

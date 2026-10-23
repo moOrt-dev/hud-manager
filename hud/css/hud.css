@@ -2978,6 +2978,8 @@ html, body {
 #bracket { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
 .bracket {
   --br-stub: 17px;
+  --br-logo: 22px;  /* square slot, identical for every team */
+  --br-pad: 8px;    /* gap between logo, name and wins */
   --br-wire: rgba(255, 255, 255, 0.3);
   padding: 24px 28px; background: var(--bg); border-radius: var(--radius);
   border-top: 4px solid var(--accent);
@@ -2989,9 +2991,14 @@ html, body {
 .br-cols { display: flex; align-items: flex-start; gap: calc(var(--br-stub) * 2); }
 .br-col { display: flex; flex-direction: column; }
 .br-title { height: 16px; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); text-align: center; margin-bottom: 12px; }
-.br-body { position: relative; width: 190px; }
+.br-body { position: relative; width: 220px; }
 .br-cell { position: absolute; left: 0; width: 100%; height: 58px; background: var(--bg-light); border-radius: 4px; }
-.br-row { display: flex; align-items: center; gap: 8px; height: 50%; padding: 0 9px; font-size: 15px; }
+.br-row { display: flex; align-items: center; gap: var(--br-pad); height: 50%; padding: 0 9px; font-size: 15px; }
+/* Fixed square for every row, logo or not, so the names stay on one line down a round. cover
+   fills it, so a logo that is not square itself - a 784x1168 one among 512x512 ones, say - still
+   reads as the same square tile as the rest instead of a narrow strip. */
+.br-logo { flex: 0 0 var(--br-logo); width: var(--br-logo); height: var(--br-logo); border-radius: 2px; overflow: hidden; }
+.br-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .br-row:first-child { border-radius: 4px 4px 0 0; }
 .br-row:last-child { border-radius: 0 0 4px 4px; }
 .br-row + .br-row { border-top: 1px solid var(--line); }
@@ -3016,7 +3023,8 @@ html, body {
 /* Centred on the divider between the two team rows: the middle of a cell is empty - names sit
    left, series wins right - so the tag reads cleanly without covering either. */
 .br-live {
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2;
+  position: absolute; top: 50%; z-index: 2;
+  left: calc(50% + (var(--br-logo) + var(--br-pad)) / 2); transform: translate(-50%, -50%);
   height: 18px; padding: 0 9px; border-radius: 3px;
   background: var(--accent); color: var(--on-side);
   font-size: 11px; line-height: 18px; letter-spacing: 2px;
