@@ -32,10 +32,12 @@ export const getActiveHudId = () => activeHudId
 const hudsPath = getHudsDir()
 const app = express()
 
+// PATCH is what the bracket uses for seeds, winners and renames; without it in the preflight
+// response the renderer's fetch is blocked and every one of those writes is silently lost.
 app.use(
   cors({
     origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE']
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
   })
 )
 
