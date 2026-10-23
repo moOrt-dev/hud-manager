@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>New HUD — Control</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #0f1117; --panel: #181b24; --panel2: #1f2330; --line: #2a2f3d;
+        --text: #eef1f6; --muted: #8e97a8; --accent: #5b9bd5; --ok: #58c27d; --danger: #e5484d;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; padding: 20px 24px 60px; background: var(--bg); color: var(--text);
+        font-family: 'Rajdhani', 'Segoe UI', sans-serif; font-weight: 600; font-size: 16px;
+      }
+      button, input, select { font: inherit; }
+      header { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-bottom: 16px; }
+      h1 { margin: 0; font-size: 26px; letter-spacing: 1px; }
+      .status { color: var(--muted); font-size: 15px; }
+      .status.ok b { color: var(--ok); }
+      .status.err { color: var(--danger); }
+      .lang { margin-left: auto; }
+
+      .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+      .seg button { padding: 6px 14px; border: 0; background: transparent; color: var(--muted); cursor: pointer; }
+      .seg button.on { background: var(--accent); color: #0b0d12; }
+
+      nav.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); margin-bottom: 18px; flex-wrap: wrap; }
+      nav.tabs button {
+        padding: 10px 18px; border: 0; border-bottom: 3px solid transparent; background: none;
+        color: var(--muted); font-size: 17px; cursor: pointer;
+      }
+      nav.tabs button.on { color: var(--text); border-bottom-color: var(--accent); }
+      section[hidden] { display: none; }
+
+      .group { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 16px 18px; margin-bottom: 14px; }
+      .group h2 { margin: 0 0 4px; font-size: 19px; }
+      .group p.hint { margin: 0 0 12px; color: var(--muted); font-size: 14px; font-weight: 500; }
+      .buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+      .btn {
+        padding: 9px 18px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel2);
+        color: var(--text); cursor: pointer;
+      }
+      .btn:hover { border-color: var(--accent); }
+      .btn.primary { background: var(--accent); border-color: var(--accent); color: #0b0d12; }
+      .btn.danger { border-color: var(--danger); color: var(--danger); background: transparent; }
+      .btn small { display: block; font-size: 12px; color: var(--muted); }
+      .btn.primary small { color: #0b0d12; opacity: 0.7; }
+      .btn:disabled { opacity: 0.5; cursor: default; }
+      .btn.on { background: var(--ok); border-color: var(--ok); color: #0b0d12; }
+      .btn.on small { color: #0b0d12; opacity: 0.7; }
+
+      .form { display: grid; grid-template-columns: minmax(220px, 360px) 1fr; gap: 10px 18px; align-items: center; max-width: 900px; }
+      .form label { color: var(--muted); font-size: 15px; }
+      .form input[type='text'], .form select {
+        width: 100%; max-width: 360px; padding: 7px 10px; background: var(--panel2); color: var(--text);
+        border: 1px solid var(--line); border-radius: 6px;
+      }
+      .form input[type='checkbox'] { width: 20px; height: 20px; accent-color: var(--accent); }
+      .color { display: flex; gap: 8px; align-items: center; }
+      .color input[type='color'] { width: 40px; height: 34px; padding: 0; border: 1px solid var(--line); border-radius: 6px; background: none; }
+      .form .sub { grid-column: 1 / -1; margin-top: 10px; font-size: 17px; color: var(--text); border-bottom: 1px solid var(--line); padding-bottom: 4px; }
+      .save-bar { display: flex; gap: 12px; align-items: center; margin-top: 16px; }
+
+      .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); gap: 16px; }
+      .card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+      .card.current { border-color: var(--ok); box-shadow: 0 0 0 1px var(--ok); }
+      .preview { position: relative; aspect-ratio: 16 / 9; background: #3c3f46; overflow: hidden; cursor: zoom-in; }
+      .preview iframe, .zoom iframe {
+        position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; border: 0; transform-origin: 0 0; pointer-events: none;
+      }
+      .info { display: flex; align-items: center; gap: 12px; padding: 12px 14px; }
+      .info h3 { margin: 0; font-size: 19px; }
+      .info p { margin: 2px 0 0; font-size: 14px; color: var(--muted); }
+      .info .grow { flex: 1; min-width: 0; }
+      .swatches { display: flex; gap: 4px; margin-top: 6px; }
+      .swatches i { width: 18px; height: 18px; border-radius: 3px; border: 1px solid rgba(255, 255, 255, 0.15); }
+      .card.current .apply { background: var(--ok); border-color: var(--ok); }
+      .theme-bar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 14px; }
+      .opt { display: flex; gap: 6px; align-items: center; color: var(--muted); font-size: 14px; }
+
+      .logos { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0; }
+      .logo { position: relative; width: 180px; height: 90px; background: var(--panel2); border: 1px solid var(--line); border-radius: 6px; display: grid; place-items: center; }
+      .logo img { max-width: 160px; max-height: 70px; object-fit: contain; }
+      .logo button { position: absolute; top: 4px; right: 4px; width: 24px; height: 24px; border: 0; border-radius: 50%; background: var(--danger); color: #fff; cursor: pointer; line-height: 1; }
+      .empty { color: var(--muted); font-size: 14px; }
+
+      .zoom { position: fixed; inset: 0; display: none; place-items: center; background: rgba(0, 0, 0, 0.85); z-index: 10; cursor: zoom-out; }
+      .zoom.show { display: grid; }
+      .zoom .frame { position: relative; width: min(95vw, 170vh); aspect-ratio: 16 / 9; overflow: hidden; background: #3c3f46; }
+      .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); padding: 10px 18px; background: var(--panel2); border: 1px solid var(--line); border-radius: 6px; opacity: 0; transition: opacity 0.3s; z-index: 20; }
+      .toast.show { opacity: 1; }
+      .toast.err { border-color: var(--danger); }
+          table.agents { width: 100%; max-width: 1100px; border-collapse: collapse; }
+      table.agents th { text-align: left; font-size: 13px; color: var(--muted); padding: 6px 8px; border-bottom: 1px solid var(--line); }
+      table.agents td { padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+      table.agents td small { display: block; color: var(--muted); font-size: 12px; }
+      table.agents .live { font-size: 11px; color: #3fbf6f; border: 1px solid #3fbf6f; border-radius: 3px; padding: 0 4px; }
+      .agent-pick { display: flex; align-items: center; gap: 8px; }
+      .agent-pick img { width: 52px; height: 39px; object-fit: contain; background: #0006; border-radius: 4px; }
+      .agent-pick select { max-width: 330px; }    </style>
+  </head>
+  <body>
+    <header>
+      <h1 data-i18n="title"></h1>
+      <span class="status" id="status"></span>
+      <div class="seg lang" id="lang">
+        <button data-lang="en">EN</button>
+        <button data-lang="ru">RU</button>
+      </div>
+    </header>
+
+    <nav class="tabs" id="tabs">
+      <button data-tab="live" data-i18n="tabLive"></button>
+      <button data-tab="settings" data-i18n="tabSettings"></button>
+      <button data-tab="themes" data-i18n="tabThemes"></button>
+      <button data-tab="sponsors" data-i18n="tabSponsors"></button>
+      <button data-tab="agents" data-i18n="tabAgents"></button>
+    </nav>
+
+    <section id="tab-live"></section>
+    <section id="tab-settings"></section>
+    <section id="tab-themes"></section>
+    <section id="tab-sponsors"></section>
+    <section id="tab-agents"></section>
+
+    <div class="zoom" id="zoom"><div class="frame"><iframe></iframe></div></div>
+    <div class="toast" id="toast"></div>
+    <!-- socket.io from the manager: live status of the auto camera -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="./js/control.js"></script>
+  </body>
+</html>
