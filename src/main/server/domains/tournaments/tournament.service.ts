@@ -118,8 +118,7 @@ export class TournamentService {
       const matchCount = size / 2 ** (Math.floor(j / 2) + 2)
       for (let slot = 0; slot < matchCount; slot++) rows.push({ bracket: 'lower', round: j, slot })
     }
-    rows.push({ bracket: 'final', round: 0, slot: 0 }) // grand final
-    rows.push({ bracket: 'final', round: 1, slot: 0 }) // bracket reset, only shown if needed
+    rows.push({ bracket: 'final', round: 0, slot: 0 }) // grand final — the last stage
     return rows
   }
 
@@ -189,22 +188,10 @@ export class TournamentService {
 
     const ubChampion = upper[k - 1][0].winnerTeamId
     const lbChampion = lower[lbRounds - 1][0].winnerTeamId
-    const match1 = await this.resolveNode(tournamentId, byKey.get('final-0-0'), 'final', 0, 0, ubChampion, lbChampion, matches)
-    // The lower-bracket side already has one loss; it must win twice to be champion, so a reset
-    // match is only needed when IT wins game one (match1.teamBId is always the lower-bracket team).
-    const resetNeeded = !!match1.winnerTeamId && match1.winnerTeamId === match1.teamBId
-    const match2 = await this.resolveNode(
-      tournamentId,
-      byKey.get('final-1-0'),
-      'final',
-      1,
-      0,
-      resetNeeded ? match1.teamAId : null,
-      resetNeeded ? match1.teamBId : null,
-      matches
-    )
-    const championTeamId = resetNeeded ? match2.winnerTeamId : match1.winnerTeamId
+    // The grand final is the last stage. Whoever wins it is the champion: there is no bracket
+    // reset, so the upper-bracket side carries no extra life into it for having stayed unbeaten.
+    const final = await this.resolveNode(tournamentId, byKey.get('final-0-0'), 'final', 0, 0, ubChampion, lbChampion, matches)
 
-    return { ...tournament, upper, lower, final: { match1, match2: resetNeeded ? match2 : null }, championTeamId }
+    return { ...tournament, upper, lower, final, championTeamId: final.winnerTeamId }
   }
 }

@@ -214,6 +214,13 @@ async function initializeTables() {
       await dbRun(`DROP TABLE tournament_nodes_old`)
     }
 
+    // The grand final used to be a pair of nodes: round 0 plus a round 1 "bracket reset" that was
+    // only played when the lower-bracket side won round 0. The grand final is now the last stage,
+    // so round 1 is dead weight — resolve() never reads it and the UNIQUE key would keep it
+    // around forever. The match rows it pointed at are left alone: they are ordinary matches and
+    // still listed under Matches.
+    await dbRun(`DELETE FROM tournament_nodes WHERE bracket = 'final' AND round = 1`)
+
     // Settings table
     await dbRun(`
       CREATE TABLE IF NOT EXISTS settings (

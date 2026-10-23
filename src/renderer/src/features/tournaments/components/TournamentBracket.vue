@@ -97,29 +97,15 @@ const onWinner = (node: ResolvedNode, side: 'A' | 'B') => {
     </div>
 
     <h2 class="text-sm font-bold uppercase tracking-wider text-zinc-400 mb-3">Grand Final</h2>
-    <div class="flex gap-8">
-      <div class="shrink-0" style="min-width: 260px">
-        <h3 class="text-xs font-bold uppercase tracking-wider text-zinc-400 text-center mb-1">Grand Final</h3>
-        <BracketMatchCard
-          :node="tournament.final.match1"
-          :editable="false"
-          :team-options="teamOptions"
-          :team-label="teamLabel"
-          @winner="(side) => onWinner(tournament!.final.match1, side)"
-          @open-match="openMatch"
-        />
-      </div>
-      <div v-if="tournament.final.match2" class="shrink-0" style="min-width: 260px">
-        <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400 text-center mb-1">Bracket Reset</h3>
-        <BracketMatchCard
-          :node="tournament.final.match2"
-          :editable="false"
-          :team-options="teamOptions"
-          :team-label="teamLabel"
-          @winner="(side) => onWinner(tournament!.final.match2!, side)"
-          @open-match="openMatch"
-        />
-      </div>
+    <div class="shrink-0" style="min-width: 260px">
+      <BracketMatchCard
+        :node="tournament.final"
+        :editable="false"
+        :team-options="teamOptions"
+        :team-label="teamLabel"
+        @winner="(side) => onWinner(tournament!.final, side)"
+        @open-match="openMatch"
+      />
     </div>
   </template>
 </template>

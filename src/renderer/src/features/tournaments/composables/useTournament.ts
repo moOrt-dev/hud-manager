@@ -27,7 +27,7 @@ export interface ResolvedTournament {
   size: 4 | 8 | 16 | 32
   upper: ResolvedNode[][]
   lower: ResolvedNode[][]
-  final: { match1: ResolvedNode; match2: ResolvedNode | null }
+  final: ResolvedNode
   championTeamId: string | null
 }
 

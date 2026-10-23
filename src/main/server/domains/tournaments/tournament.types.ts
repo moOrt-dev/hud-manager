@@ -44,6 +44,6 @@ export interface ResolvedNode {
 export interface ResolvedTournament extends Tournament {
   upper: ResolvedNode[][]
   lower: ResolvedNode[][]
-  final: { match1: ResolvedNode; match2: ResolvedNode | null }
+  final: ResolvedNode
   championTeamId: string | null
 }
