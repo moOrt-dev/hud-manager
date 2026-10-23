@@ -9,6 +9,8 @@
   { "bind": "Shift+Z", "action": "radarBigger" },
   { "bind": "Shift+X", "action": "radarSmaller" },
   { "bind": "Alt+K", "action": "toggleVeto" },
+  { "bind": "Alt+U", "action": "toggleUpperBracket" },
+  { "bind": "Alt+L", "action": "toggleLowerBracket" },
   { "bind": "Alt+1", "action": "sbStats" },
   { "bind": "Alt+2", "action": "sbEconomy" },
   { "bind": "Alt+3", "action": "sbLeaders" },

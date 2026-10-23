@@ -19,7 +19,10 @@ async function get(path) {
 export const api = {
   currentMatch: () => get('match/current'),
   team: (id) => get(`teams/${id}`),
-  players: () => get('players')
+  teams: () => get('teams'),
+  players: () => get('players'),
+  // the bracket the given match sits in; the manager falls back to the most recent one
+  bracketForMatch: (matchId) => get(`tournaments/for-match/${matchId}`)
 }
 
 // Registers the HUD with the server exactly like the built-in HUD does:

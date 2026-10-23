@@ -3,6 +3,7 @@ import { buildState } from './state.js'
 import { createTopbar, createPlayers, createObserved, setAgentPicks } from './render.js'
 import { createRadar } from './radar.js'
 import { createKillfeed, createEconomy, createSponsors, createVeto, createSeries } from './features.js'
+import { createBracket } from './bracket.js'
 import { applyTheme } from './themes.js'
 import { createStats } from './stats.js'
 import { createScoreboard } from './scoreboard.js'
@@ -21,6 +22,9 @@ let config = {} // display_settings from panel.json
 let lastRaw = null
 let lastState = null
 let vetoVisible = false
+let bracketView = '' // '' | 'upper' | 'lower' — Alt+U / Alt+L
+let bracket = null // the resolved bracket of the live match, fetched on demand and kept fresh
+let bracketTeams = {}
 let sbView = '' // '' | 'stats' | 'economy' | 'leaders'
 let defuseFlip = false // Alt+D (Alt+В): show / hide the separate defuse window on top of the panel setting
 let layoutFlip = false // Alt+V: switch the player tile layout on top of the panel setting
@@ -50,9 +54,11 @@ const renderSeries = createSeries($('series'))
 const renderScoreboard = createScoreboard($('scoreboard'))
 const stats = createStats()
 const renderDefuse = createDefusePopup($('defuse'))
+const renderBracket = createBracket($('bracket'))
 
 function render() {
   renderVeto(lastState, ctx, vetoVisible && !sbView)
+  renderBracket(bracket, bracketTeams, sbView ? '' : bracketView)
   if (!lastRaw?.map) {
     hudEl.classList.add('idle')
     return
@@ -219,6 +225,23 @@ async function loadMatch() {
   render()
 }
 
+// The HUD knows the live match, not which tournament it came from, so the manager resolves that.
+async function loadBracket() {
+  if (!bracketView) return
+  try {
+    // No live match yet (between maps, before the first "Start") still shows a bracket: the
+    // manager falls back to the most recent one for an id it does not know.
+    const matchId = ctx.match?.id || ctx.match?._id || 'none'
+    const [resolved, teams] = await Promise.all([api.bracketForMatch(matchId), api.teams()])
+    bracket = resolved
+    bracketTeams = Object.fromEntries((teams || []).map((t) => [t._id, t]))
+  } catch {
+    bracket = null
+    bracketTeams = {}
+  }
+  render()
+}
+
 async function loadPlayers() {
   try {
     const list = await api.players()
@@ -257,6 +280,12 @@ const setVeto = (v) => {
   render()
 }
 
+const setBracket = (view) => {
+  bracketView = bracketView === view ? '' : view
+  if (bracketView) loadBracket()
+  else render()
+}
+
 const actions = {
   toggleHud: () => hudEl.classList.toggle('hidden'),
   togglePlayers: () => hudEl.classList.toggle('no-players'),
@@ -272,6 +301,13 @@ const actions = {
   },
   toggleRadar: () => hudEl.classList.toggle('no-radar'),
   toggleVeto: () => setVeto(!vetoVisible),
+  toggleUpperBracket: () => setBracket('upper'),
+  toggleLowerBracket: () => setBracket('lower'),
+  // panel "action" buttons: { action: 'bracket', data: 'upper' | 'lower' | 'hide' }
+  bracket: (data) => {
+    bracketView = data === 'upper' || data === 'lower' ? data : ''
+    bracketView ? loadBracket() : render()
+  },
   sbStats: () => setBoard('stats'),
   sbEconomy: () => setBoard('economy'),
   sbLeaders: () => setBoard('leaders'),
@@ -308,7 +344,9 @@ if (!params.has('preview')) connect(HUD_NAME, {
   match: () => {
     loadMatch()
     loadPlayers()
+    loadBracket()
   },
+  tournament: () => loadBracket(),
   hud_config: (cfg) => !MOCK && applyConfig(cfg), // mock keeps its own test config
   keybindAction: (a) => actions[typeof a === 'string' ? a : a?.action]?.(a?.data),
   hud_action: (a) => actions[a?.action]?.(a?.data),
