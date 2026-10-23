@@ -67,46 +67,56 @@ const onWinner = (node: ResolvedNode, side: 'A' | 'B') => {
     </div>
 
     <h2 class="text-sm font-bold uppercase tracking-wider text-zinc-400 mb-3">Upper Bracket</h2>
-    <div class="flex gap-8 overflow-x-auto pb-4 mb-8">
-      <div v-for="(round, r) in tournament.upper" :key="r" class="flex flex-col justify-around gap-4 shrink-0" style="min-width: 260px">
-        <h3 class="text-xs font-bold uppercase tracking-wider text-zinc-400 text-center mb-1">
-          {{ upperRoundName(tournament.upper.length, r) }}
-        </h3>
-        <BracketMatchCard
-          v-for="node in round"
-          :key="node.slot"
-          :node="node"
-          :editable="r === 0"
-          :team-options="teamOptions"
-          :team-label="teamLabel"
-          @seed="(side, teamId) => onSeed(node.slot, side, teamId)"
-          @winner="(side) => onWinner(node, side)"
-          @open-match="openMatch"
-        />
+    <!-- items-stretch gives every round the height of the tallest one, so justify-around inside a
+         round centres each match on the pair that feeds it and the rounds line up as a tree. -->
+    <div class="overflow-x-auto pb-4 mb-10">
+      <div class="flex gap-6 items-stretch min-w-max">
+        <div v-for="(round, r) in tournament.upper" :key="r" class="flex flex-col w-[260px] shrink-0">
+          <h3 class="h-5 text-xs font-bold uppercase tracking-wider text-zinc-500 text-center mb-3">
+            {{ upperRoundName(tournament.upper.length, r) }}
+          </h3>
+          <div class="flex-1 flex flex-col justify-around gap-5">
+            <BracketMatchCard
+              v-for="node in round"
+              :key="node.slot"
+              :node="node"
+              :editable="r === 0"
+              :team-options="teamOptions"
+              :team-label="teamLabel"
+              @seed="(side, teamId) => onSeed(node.slot, side, teamId)"
+              @winner="(side) => onWinner(node, side)"
+              @open-match="openMatch"
+            />
+          </div>
+        </div>
       </div>
     </div>
 
     <h2 class="text-sm font-bold uppercase tracking-wider text-zinc-400 mb-3">Lower Bracket</h2>
-    <div class="flex gap-8 overflow-x-auto pb-4 mb-8">
-      <div v-for="(round, j) in tournament.lower" :key="j" class="flex flex-col justify-around gap-4 shrink-0" style="min-width: 260px">
-        <h3 class="text-xs font-bold uppercase tracking-wider text-zinc-400 text-center mb-1">
-          {{ lowerRoundName(tournament.lower.length, j) }}
-        </h3>
-        <BracketMatchCard
-          v-for="node in round"
-          :key="node.slot"
-          :node="node"
-          :editable="false"
-          :team-options="teamOptions"
-          :team-label="teamLabel"
-          @winner="(side) => onWinner(node, side)"
-          @open-match="openMatch"
-        />
+    <div class="overflow-x-auto pb-4 mb-10">
+      <div class="flex gap-6 items-stretch min-w-max">
+        <div v-for="(round, j) in tournament.lower" :key="j" class="flex flex-col w-[260px] shrink-0">
+          <h3 class="h-5 text-xs font-bold uppercase tracking-wider text-zinc-500 text-center mb-3">
+            {{ lowerRoundName(tournament.lower.length, j) }}
+          </h3>
+          <div class="flex-1 flex flex-col justify-around gap-5">
+            <BracketMatchCard
+              v-for="node in round"
+              :key="node.slot"
+              :node="node"
+              :editable="false"
+              :team-options="teamOptions"
+              :team-label="teamLabel"
+              @winner="(side) => onWinner(node, side)"
+              @open-match="openMatch"
+            />
+          </div>
+        </div>
       </div>
     </div>
 
     <h2 class="text-sm font-bold uppercase tracking-wider text-zinc-400 mb-3">Grand Final</h2>
-    <div class="shrink-0" style="min-width: 260px">
+    <div class="w-[260px]">
       <BracketMatchCard
         :node="tournament.final"
         :editable="false"

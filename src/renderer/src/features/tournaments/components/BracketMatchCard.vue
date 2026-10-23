@@ -28,7 +28,7 @@ const toggleWinner = (side: 'A' | 'B') => {
     <div
       v-for="side in (['A', 'B'] as const)"
       :key="side"
-      class="flex items-center gap-2 rounded-lg px-2 py-1.5"
+      class="flex items-center gap-2 rounded-lg px-2 py-1.5 min-h-[38px]"
       :class="
         node.winnerTeamId && node.winnerTeamId === (side === 'A' ? node.teamAId : node.teamBId)
           ? node.winnerIsManual
@@ -80,9 +80,12 @@ const toggleWinner = (side: 'A' | 'B') => {
       >✓</button>
     </div>
 
-    <div v-if="node.match" class="flex items-center justify-between pt-1 border-t border-border/50">
-      <BaseBadge variant="zinc">{{ node.match.matchType }}</BaseBadge>
-      <button type="button" class="text-xs text-primary hover:underline" @click="emit('openMatch', node.match.id)">Open match</button>
+    <div class="flex items-center justify-between pt-1 border-t border-border/50 min-h-[30px]">
+      <template v-if="node.match">
+        <BaseBadge variant="zinc">{{ node.match.matchType }}</BaseBadge>
+        <button type="button" class="text-xs text-primary hover:underline" @click="emit('openMatch', node.match.id)">Open match</button>
+      </template>
+      <span v-else class="text-xs text-zinc-600 italic">waiting for both teams</span>
     </div>
   </div>
 </template>
