@@ -35,8 +35,8 @@
 Новые версии менеджер покажет сам, баннером «есть обновление».
 
 ### Установка вручную (только HUD, в оригинальный JTs Hud Manager)
-1. Скачайте репозиторий: **Code → Download ZIP** — и распакуйте.
-2. Выполните в папке проекта `powershell -ExecutionPolicy Bypass -File deploy.ps1`.
+1. Скачайте репозиторий: **Code → Download ZIP** — и распакуйте. HUD лежит в папке `hud`.
+2. Выполните в папке `hud` `powershell -ExecutionPolicy Bypass -File deploy.ps1`.
    На macOS / Linux — то же самое: `node deploy.mjs --dest ~/jthm-huds/newHud` (нужен Node 18+).
    Просто скопировать папку недостаточно: `panel.json`, `hotkeys.json` и `manager-ru.json` собираются скриптом, и без них менеджер не покажет панель настроек HUD.
 3. Для авто-камеры через консоль CS2 поставьте патч `manager-patch\patch-telnet.ps1` (менеджер должен быть закрыт).
@@ -127,8 +127,8 @@ Uninstall: "Settings → Apps → HUD Manager (mo_ORT)". Your data and the HUD f
 The manager shows new versions by itself, with an "update available" banner.
 
 ### Manual install (only the HUD, into the original JTs Hud Manager)
-1. Download the repository: **Code → Download ZIP** — and unpack it.
-2. Run `powershell -ExecutionPolicy Bypass -File deploy.ps1` in the project folder.
+1. Download the repository: **Code → Download ZIP** — and unpack it. The HUD is in the `hud` folder.
+2. Run `powershell -ExecutionPolicy Bypass -File deploy.ps1` in the `hud` folder.
    On macOS / Linux, the same thing: `node deploy.mjs --dest ~/jthm-huds/newHud` (needs Node 18+).
    Copying the folder is not enough: `panel.json`, `hotkeys.json` and `manager-ru.json` are built by the script, and without them the manager shows no settings panel for the HUD.
 3. For the auto camera through the CS2 console, apply `manager-patch\patch-telnet.ps1` (the manager must be closed).
