@@ -108,6 +108,12 @@ export class TournamentRepository {
     )
   }
 
+  // True while any bracket cell anywhere still points at this match.
+  async isMatchReferenced(matchId: string): Promise<boolean> {
+    const row = await dbGet('SELECT 1 FROM tournament_nodes WHERE match_id = ? LIMIT 1', [matchId])
+    return !!row
+  }
+
   async setNodeMatch(
     tournamentId: string,
     bracket: BracketSection,

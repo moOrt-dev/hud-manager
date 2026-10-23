@@ -17,6 +17,11 @@ const MAJORITY: Record<Match['matchType'], number> = { bo1: 1, bo2: 2, bo3: 2, b
 export class TournamentService {
   private repo = new TournamentRepository()
   private matchRepo = new MatchRepository()
+  // resolve() writes as well as reads — it creates and discards the matches behind the cells — and
+  // the renderer fires several reads at once (socket 'tournament' and 'match' both refetch). Two
+  // overlapping runs would each see the same stale node, each create a match for it, and only one
+  // of the two would be discarded, so runs are queued per tournament.
+  private running = new Map<string, Promise<unknown>>()
 
   async getAllTournaments() {
     return this.repo.getAllTournaments()
@@ -45,6 +50,20 @@ export class TournamentService {
   async setWinner(id: string, bracket: BracketSection, round: number, slot: number, teamId: string | null) {
     await this.repo.setWinnerOverride(id, bracket, round, slot, teamId)
     return this.resolve(id)
+  }
+
+  // A node only ever points at one match, so repointing it (a re-seed, a cleared pairing) leaves
+  // the old row behind. Drop it, but only while it is still the empty shell this domain created:
+  // anything with a score, a veto or the live flag is a match someone worked on, and it stays in
+  // Matches even though the bracket no longer links to it.
+  private async discardUnusedMatch(matchId: string | null, matches: Map<string, Match>): Promise<void> {
+    if (!matchId) return
+    if (await this.repo.isMatchReferenced(matchId)) return
+    const match = matches.get(matchId) ?? (await this.matchRepo.getMatchById(matchId))
+    if (!match) return
+    if (match.current || match.left.wins > 0 || match.right.wins > 0 || match.vetos.length > 0) return
+    await this.matchRepo.deleteMatch(matchId)
+    matches.delete(matchId)
   }
 
   private winnerOf(match: Match | null, override: string | null): string | null {
@@ -76,6 +95,7 @@ export class TournamentService {
     let winnerOverride = node?.winnerOverride ?? null
 
     if (teamAId && teamBId && (!match || pairingChanged)) {
+      const previousMatchId = node?.matchId ?? null
       match = await this.matchRepo.createMatch({
         current: false,
         left: { id: teamAId, wins: 0 },
@@ -85,6 +105,7 @@ export class TournamentService {
       })
       matches.set(match.id, match)
       await this.repo.setNodeMatch(tournamentId, bracket, round, slot, match.id)
+      await this.discardUnusedMatch(previousMatchId, matches)
       // A stale override (set for the previous pairing) can no longer name a team on either side
       // of the new match — drop it, or a team that just got knocked out could still "win" here.
       if (pairingChanged && winnerOverride) {
@@ -93,8 +114,10 @@ export class TournamentService {
       }
     } else if (!(teamAId && teamBId)) {
       if (node?.matchId) {
+        const previousMatchId = node.matchId
         match = null
         await this.repo.setNodeMatch(tournamentId, bracket, round, slot, null)
+        await this.discardUnusedMatch(previousMatchId, matches)
       }
       if (winnerOverride) {
         await this.repo.setWinnerOverride(tournamentId, bracket, round, slot, null)
@@ -104,7 +127,8 @@ export class TournamentService {
 
     const winnerTeamId = teamAId && teamBId ? this.winnerOf(match, winnerOverride) : null
     const loserTeamId = winnerTeamId ? (winnerTeamId === teamAId ? teamBId : teamAId) : null
-    return { bracket, round, slot, teamAId, teamBId, winnerTeamId, loserTeamId, match }
+    const winnerIsManual = !!winnerTeamId && winnerTeamId === winnerOverride
+    return { bracket, round, slot, teamAId, teamBId, winnerTeamId, loserTeamId, winnerIsManual, match }
   }
 
   // Lower-bracket round j (0-indexed) has size/2^(floor(j/2)+2) matches. j=0 pairs up upper round
@@ -130,6 +154,17 @@ export class TournamentService {
   }
 
   async resolve(tournamentId: string): Promise<ResolvedTournament> {
+    const previous = this.running.get(tournamentId) ?? Promise.resolve()
+    const run = previous.catch(() => undefined).then(() => this.resolveNow(tournamentId))
+    const queued: Promise<unknown> = run.catch(() => undefined)
+    this.running.set(tournamentId, queued)
+    void queued.then(() => {
+      if (this.running.get(tournamentId) === queued) this.running.delete(tournamentId)
+    })
+    return run
+  }
+
+  private async resolveNow(tournamentId: string): Promise<ResolvedTournament> {
     const tournament = await this.repo.getTournamentById(tournamentId)
     if (!tournament) throw new Error('Tournament not found')
     await this.ensureFullBracket(tournament)

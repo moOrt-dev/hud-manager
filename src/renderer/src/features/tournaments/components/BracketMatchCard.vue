@@ -29,7 +29,13 @@ const toggleWinner = (side: 'A' | 'B') => {
       v-for="side in (['A', 'B'] as const)"
       :key="side"
       class="flex items-center gap-2 rounded-lg px-2 py-1.5"
-      :class="node.winnerTeamId && node.winnerTeamId === (side === 'A' ? node.teamAId : node.teamBId) ? 'bg-emerald-500/10' : ''"
+      :class="
+        node.winnerTeamId && node.winnerTeamId === (side === 'A' ? node.teamAId : node.teamBId)
+          ? node.winnerIsManual
+            ? 'bg-amber-500/10'
+            : 'bg-emerald-500/10'
+          : ''
+      "
     >
       <template v-if="editable">
         <BaseSelect
@@ -55,12 +61,20 @@ const toggleWinner = (side: 'A' | 'B') => {
       <button
         v-if="side === 'A' ? node.teamAId : node.teamBId"
         type="button"
-        title="Mark as winner"
+        :title="
+          node.winnerTeamId !== (side === 'A' ? node.teamAId : node.teamBId)
+            ? 'Mark as winner'
+            : node.winnerIsManual
+              ? 'Winner set by hand — click to clear and fall back to the series score'
+              : 'Winner from the series score'
+        "
         class="shrink-0 w-5 h-5 rounded-full border text-[10px] flex items-center justify-center transition-colors"
         :class="
-          node.winnerTeamId === (side === 'A' ? node.teamAId : node.teamBId)
-            ? 'bg-emerald-500 border-emerald-500 text-zinc-900'
-            : 'border-zinc-600 text-zinc-500 hover:border-emerald-500 hover:text-emerald-400'
+          node.winnerTeamId !== (side === 'A' ? node.teamAId : node.teamBId)
+            ? 'border-zinc-600 text-zinc-500 hover:border-emerald-500 hover:text-emerald-400'
+            : node.winnerIsManual
+              ? 'bg-amber-500 border-amber-500 text-zinc-900'
+              : 'bg-emerald-500 border-emerald-500 text-zinc-900'
         "
         @click="toggleWinner(side)"
       >✓</button>

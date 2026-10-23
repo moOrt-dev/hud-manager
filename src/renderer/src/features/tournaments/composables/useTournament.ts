@@ -12,6 +12,8 @@ export interface ResolvedNode {
   teamBId: string | null
   winnerTeamId: string | null
   loserTeamId: string | null
+  // True when the winner was ticked by hand rather than read off the match score.
+  winnerIsManual: boolean
   match: {
     id: string
     matchType: 'bo1' | 'bo2' | 'bo3' | 'bo5'

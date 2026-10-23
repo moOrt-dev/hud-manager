@@ -57,6 +57,15 @@ const onWinner = (node: ResolvedNode, side: 'A' | 'B') => {
       <span class="text-text-main font-bold">Champion: {{ championLabel }}</span>
     </div>
 
+    <div class="flex items-center gap-4 mb-5 text-xs text-zinc-500">
+      <span class="flex items-center gap-1.5">
+        <span class="w-3 h-3 rounded-full bg-emerald-500 shrink-0"></span>won on the series score
+      </span>
+      <span class="flex items-center gap-1.5">
+        <span class="w-3 h-3 rounded-full bg-amber-500 shrink-0"></span>winner set by hand
+      </span>
+    </div>
+
     <h2 class="text-sm font-bold uppercase tracking-wider text-zinc-400 mb-3">Upper Bracket</h2>
     <div class="flex gap-8 overflow-x-auto pb-4 mb-8">
       <div v-for="(round, r) in tournament.upper" :key="r" class="flex flex-col justify-around gap-4 shrink-0" style="min-width: 260px">
