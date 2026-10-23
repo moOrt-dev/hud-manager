@@ -23,6 +23,9 @@ const TEXT = {
     sbStats: 'Stats', sbStatsSub: 'K / A / D, ADR, HS%, MVP', sbEconomy: 'Economy', sbEconomySub: 'money, weapons, grenades',
     sbLeaders: 'Leaders', sbLeadersSub: 'best players, team comparison', sbHide: 'Hide scoreboard',
     liveVeto: 'Map veto', liveVetoHint: 'Picks and bans of the current match (created in the manager). Hotkey: Alt+K.',
+    liveBracket: 'Tournament bracket',
+    liveBracketHint: 'The bracket the live match belongs to (built in the manager). Hotkeys: Alt+U and Alt+L.',
+    brUpper: 'Upper bracket', brLower: 'Lower bracket',
     show: 'Show', hide: 'Hide',
     liveHud: 'Overlay parts', liveHudHint: 'Temporarily hide parts of the overlay. Each button toggles: press again to bring it back.',
     toggleHud: 'Whole HUD', toggleHudSub: 'Alt+O', togglePlayers: 'Player lists', togglePlayersSub: 'Alt+P',
@@ -34,6 +37,7 @@ const TEXT = {
     hk_toggleLayout: 'Player tiles: vertical cards at the bottom / rows at the sides', hk_toggleNames: 'Top bar: keep team names open / fold',
     hk_reload: 'Reload the overlay', hk_toggleDefuse: 'Defuse window: show / hide', toggleDefuse: 'Defuse window', toggleDefuseSub: 'Alt+D', hk_toggleRadar: 'Hide / show the radar', hk_radarBigger: 'Radar bigger (up to 400 px)',
     hk_radarSmaller: 'Radar smaller (down to 250 px)', hk_toggleVeto: 'Map veto screen: show / hide',
+    hk_toggleUpperBracket: 'Tournament bracket: upper', hk_toggleLowerBracket: 'Tournament bracket: lower',
     hk_sbStats: 'Scoreboard: stats', hk_sbEconomy: 'Scoreboard: economy', hk_sbLeaders: 'Scoreboard: leaders', hk_sbHide: 'Hide the scoreboard', hk_obsHand: 'Auto camera: manual control / back to auto', hk_bombCam: 'Camera on the bomb from above / back to the players',
     obsBomb: 'Bomb camera (Alt+B again — back to the players)', obsNoBomb: 'Alt+B: no bomb position in the game data',
     toggleNames: 'Top bar: team names', toggleNamesSub: 'Alt+N', reload: 'Reload the overlay', reloadSub: 'Alt+F5', names_secs: 'Top bar: team names at round start, sec',
@@ -102,6 +106,9 @@ const TEXT = {
     sbStats: 'Статистика', sbStatsSub: 'убийства, помощь, смерти, урон, MVP', sbEconomy: 'Экономика', sbEconomySub: 'деньги, оружие, гранаты',
     sbLeaders: 'Лидеры', sbLeadersSub: 'лучшие игроки, сравнение команд', sbHide: 'Скрыть табло',
     liveVeto: 'Выбор карт', liveVetoHint: 'Пики и баны текущего матча (матч создаётся в менеджере). Клавиша: Alt+K.',
+    liveBracket: 'Турнирная сетка',
+    liveBracketHint: 'Сетка, к которой относится текущий матч (создаётся в менеджере). Клавиши: Alt+U и Alt+L.',
+    brUpper: 'Верхняя сетка', brLower: 'Нижняя сетка',
     show: 'Показать', hide: 'Скрыть',
     liveHud: 'Части оверлея', liveHudHint: 'Временно скрыть части оверлея. Кнопка работает как переключатель: нажмите ещё раз, чтобы вернуть.',
     toggleHud: 'Весь HUD', toggleHudSub: 'Alt+O', togglePlayers: 'Списки игроков', togglePlayersSub: 'Alt+P',
@@ -113,6 +120,7 @@ const TEXT = {
     hk_toggleLayout: 'Плитки игроков: вертикальные карточки внизу / строки по бокам', hk_toggleNames: 'Шапка: держать названия команд открытыми / свернуть',
     hk_reload: 'Перезагрузить оверлей', hk_toggleDefuse: 'Окно дефуза: показать / скрыть', toggleDefuse: 'Окно дефуза', toggleDefuseSub: 'Alt+D (В)', hk_toggleRadar: 'Скрыть / показать радар', hk_radarBigger: 'Радар больше (до 400 px)',
     hk_radarSmaller: 'Радар меньше (до 250 px)', hk_toggleVeto: 'Экран вето карт: показать / скрыть',
+    hk_toggleUpperBracket: 'Турнирная сетка: верхняя', hk_toggleLowerBracket: 'Турнирная сетка: нижняя',
     hk_sbStats: 'Табло: статистика', hk_sbEconomy: 'Табло: экономика', hk_sbLeaders: 'Табло: лидеры', hk_sbHide: 'Скрыть табло', hk_obsHand: 'Авто-камера: ручное управление / вернуть авто', hk_bombCam: 'Камера на бомбу сверху / вернуть к игрокам',
     obsBomb: 'Камера на бомбе (Alt+B ещё раз — вернуть к игрокам)', obsNoBomb: 'Alt+B: позиции бомбы нет в данных игры',
     toggleNames: 'Шапка: названия команд', toggleNamesSub: 'Alt+N', reload: 'Перезагрузить оверлей', reloadSub: 'Alt+F5', names_secs: 'Шапка: названия команд в начале раунда, сек',
@@ -308,6 +316,14 @@ function renderLive() {
       <div class="buttons">
         ${btn(tr('show'), '', 'data-remote="veto" data-value="show"', 'primary')}
         ${btn(tr('hide'), '', 'data-remote="veto" data-value="hide"', 'danger')}
+      </div>
+    </div>
+    <div class="group">
+      <h2>${tr('liveBracket')}</h2><p class="hint">${tr('liveBracketHint')}</p>
+      <div class="buttons">
+        ${btn(tr('brUpper'), keyOf('toggleUpperBracket'), 'data-remote="bracket" data-value="upper"', 'primary')}
+        ${btn(tr('brLower'), keyOf('toggleLowerBracket'), 'data-remote="bracket" data-value="lower"', 'primary')}
+        ${btn(tr('hide'), '', 'data-remote="bracket" data-value="hide"', 'danger')}
       </div>
     </div>
     <div class="group">
